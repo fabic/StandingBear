@@ -31,6 +31,10 @@ pathprepend "$StandingBear/bin"
 
 LANG=${LANG:-C}
 
+#unset SSH_CLIENT
+APACHE_AdminIp=${APACHE_AdminIp:-${SSH_CLIENT%% *}}
+APACHE_AdminIp=${APACHE_AdminIp:-127.0.0.1}
+
 APACHE_ServerRoot=${APACHE_ServerRoot:-$StandingBear}
 APACHE_ConfigFile=${APACHE_ConfigFile:-conf/httpd.conf}
 
@@ -60,6 +64,7 @@ fi
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
 APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -nu`}
 
+APACHE_HostDomain=${APACHE_HostDomain:-`hostname -d`}
 APACHE_Hostname=${APACHE_Hostname:-`hostname -f`}
 APACHE_ListenPort=${APACHE_ListenPort:-8000}
 APACHE_ListenPortSSL=${APACHE_ListenPortSSL:-8001}

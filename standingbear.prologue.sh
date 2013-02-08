@@ -8,6 +8,10 @@
 prefixed_paths "$StandingBear/local/apache"
 prefixed_paths "$StandingBear/local/php"
 
+# Defaults to $SSH_CLIENT if defined!
+# See httpd.local.conf about SetEnvIf .. let_me_in
+#APACHE_AdminIp=127.0.0.1
+
 # Defaults to C if not defined.
 #LANG=C
 #LANG=en_US.UTF-8
