@@ -5,11 +5,11 @@
 # This currently breaks the configurations that come with some web application
 # Debian packages.
 #
-#<Directory />
-#	AllowOverride None
-#	Order Deny,Allow
-#	Deny from all
-#</Directory>
+<Directory />
+    AllowOverride None
+    Order Deny,Allow
+    Deny from all
+</Directory>
 
 
 # Changing the following options will not really affect the security of the
@@ -25,7 +25,6 @@
 #
 #ServerTokens Minimal
 ServerTokens OS
-#ServerTokens Full
 
 #
 # Optionally add a line containing the server version and virtual host
@@ -49,3 +48,4 @@ ServerSignature On
 TraceEnable Off
 #TraceEnable On
 
+# vim: ts=4 filetype=apache

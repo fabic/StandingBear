@@ -1,1 +1,1 @@
-LoadModule asis_module /usr/lib/apache2/modules/mod_asis.so
+LoadModule asis_module ${APACHE_Modules}/mod_asis.so

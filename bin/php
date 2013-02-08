@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# todo: Have a php/php-cli.ini ?
+#
+source `dirname "$0"`/../standingbear.sh
+
+exec \
+    $Env \
+    "$PHPBIN" -c "$PHPINI" \
+    "$@"

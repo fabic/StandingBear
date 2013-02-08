@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Note: Apache is run in an empty environment, see $Env.
+#
+# todo: Removing trailling slashes from paths ?
+# todo: Prepend *PATH with stuff in local/ ?
+# todo: have a check_path_correct() func. ?
+#
+source `dirname "$0"`/standingbear.sh
+
+# TEMP... 
+echo Environment :
+for e in ${Environment[@]}; do
+    echo -n '   '
+    echo $e=${!e}
+done
+
+echo "Apache home: $APACHE_Home"
+echo "httpd is: $APACHE_Httpd"
+echo "Apache defines (-D ...) : ${ApacheDefines[@]}"
+
+# fixme: Temp.
+touch "$StandingBear/var/log/php.log"
+#exec \
+#echo \
+$Env \
+    $APACHE_Httpd \
+    ${ApacheDefines[@]/#/-D } \
+    -d "$APACHE_ServerRoot" \
+    -f "$APACHE_ConfigFile" \
+    "$@"
+retv=$?
+echo "Exit status: $retv"

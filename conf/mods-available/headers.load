@@ -1,1 +1,1 @@
-LoadModule headers_module /usr/lib/apache2/modules/mod_headers.so
+LoadModule headers_module ${APACHE_Modules}/mod_headers.so

@@ -1,1 +1,1 @@
-LoadModule actions_module /usr/lib/apache2/modules/mod_actions.so
+LoadModule actions_module ${APACHE_Modules}/mod_actions.so

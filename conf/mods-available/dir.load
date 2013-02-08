@@ -1,1 +1,1 @@
-LoadModule dir_module /usr/lib/apache2/modules/mod_dir.so
+LoadModule dir_module ${APACHE_Modules}/mod_dir.so

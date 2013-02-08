@@ -1,1 +1,1 @@
-LoadModule ident_module /usr/lib/apache2/modules/mod_ident.so
+LoadModule ident_module ${APACHE_Modules}/mod_ident.so

@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Lists the apache processes.
+#
+# Usage: papache [<user1>, ..., <userN>]
+#
+
+#alias papache='( httpd_pids=`pgrep -u $USER,root httpd` ; [ ! "$httpd_pids" ] || ps -H u -p $httpd_pids )'
+
+users=${@/#/-u }
+
+httpd_pids=`pgrep $users httpd`
+[ ! "$httpd_pids" ] || ps -H u -p $httpd_pids

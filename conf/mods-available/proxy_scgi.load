@@ -1,2 +1,2 @@
 # Depends: proxy
-LoadModule proxy_scgi_module /usr/lib/apache2/modules/mod_proxy_scgi.so
+LoadModule proxy_scgi_module ${APACHE_Modules}/mod_proxy_scgi.so

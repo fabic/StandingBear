@@ -1,1 +1,1 @@
-LoadModule include_module /usr/lib/apache2/modules/mod_include.so
+LoadModule include_module ${APACHE_Modules}/mod_include.so

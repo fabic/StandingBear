@@ -1,1 +1,1 @@
-LoadModule auth_basic_module /usr/lib/apache2/modules/mod_auth_basic.so
+LoadModule auth_basic_module ${APACHE_Modules}/mod_auth_basic.so

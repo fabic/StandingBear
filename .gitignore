@@ -1,0 +1,9 @@
+.*.sw*
+*~
+var/lock
+var/log
+var/run
+var/tmp
+php/php-chunked-xhtml/
+php/session_files/
+var/www/default/doc/

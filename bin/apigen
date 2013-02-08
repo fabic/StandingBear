@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# bin/apigen
+#
+HERE=$( cd `dirname "$0"` && pwd )
+
+APIGEN=${APIGEN:-$HERE/../local/apigen/apigen.php}
+
+exec php -f $APIGEN -- "$@"

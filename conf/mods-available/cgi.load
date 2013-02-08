@@ -1,1 +1,1 @@
-LoadModule cgi_module /usr/lib/apache2/modules/mod_cgi.so
+LoadModule cgi_module ${APACHE_Modules}/mod_cgi.so

@@ -1,31 +1,43 @@
-<VirtualHost *:80>
-	ServerAdmin webmaster@localhost
+#<VirtualHost *:80>
+<IfDefine DEFAULT_VHOST>
+<VirtualHost *:${APACHE_ListenPort}>
+	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	DocumentRoot /var/www
+	#DocumentRoot "${APACHE_ServerRoot}/var/www/default"
+	DocumentRoot "${APACHE_ServerRoot}/www"
+
+    DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+    #DirectoryIndex /_h5ai/server/php/index.php
+
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
-	<Directory /var/www/>
+
+	<Directory "${APACHE_ServerRoot}/www">
 		Options Indexes FollowSymLinks MultiViews
-		AllowOverride None
+		#AllowOverride None
+		AllowOverride All
+		#AllowOverride FileInfo
 		Order allow,deny
 		allow from all
 	</Directory>
 
-	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
-	<Directory "/usr/lib/cgi-bin">
+	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/var/www/default/cgi-bin/"
+	<Directory "${APACHE_ServerRoot}/var/www/default/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny
 		Allow from all
 	</Directory>
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
+	#ErrorLog var/log/error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
-	LogLevel warn
+	#LogLevel info
 
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+	#CustomLog var/log/access.log combined
 </VirtualHost>
+</IfDefine>
+# vim: ts=4 filetype=apache

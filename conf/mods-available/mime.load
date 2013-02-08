@@ -1,1 +1,1 @@
-LoadModule mime_module /usr/lib/apache2/modules/mod_mime.so
+LoadModule mime_module ${APACHE_Modules}/mod_mime.so

@@ -1,1 +1,1 @@
-LoadModule substitute_module /usr/lib/apache2/modules/mod_substitute.so
+LoadModule substitute_module ${APACHE_Modules}/mod_substitute.so

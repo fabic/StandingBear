@@ -1,0 +1,39 @@
+# F.2013-02-06
+
+<VirtualHost *:${APACHE_ListenPort}>
+    #ServerName ${APACHE_Hostname}
+    ServerName www.example.org
+
+	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
+
+	DocumentRoot "${APACHE_ServerRoot}/var/www/www.example.org"
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+	<Directory "${APACHE_ServerRoot}/var/www/www.example.org">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/var/www/www.example.org/cgi-bin/"
+	<Directory "${APACHE_ServerRoot}/var/www/www.example.org/cgi-bin/">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	#ErrorLog var/log/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	#LogLevel info
+
+	#CustomLog var/log/access.log combined
+</VirtualHost>
+# vim: ts=4 filetype=apache

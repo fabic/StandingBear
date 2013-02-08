@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# monitor_access_log.sh
+#
+# Arguments: [<tail_argument1>, ...] -- [<ignore_regex1>, ...]
+#
+source `dirname "$0"`/standingbear.sh
+
+CCZEBIN=`which ccze`
+
+##
+#
+#
+filter_vhost_combined () {
+    return
+}
+
+exec tail -f "$StandingBear/var/log/"{error_log,access_log,php.log} | $CCZEBIN -A

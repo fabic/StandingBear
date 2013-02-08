@@ -1,1 +1,1 @@
-LoadModule usertrack_module /usr/lib/apache2/modules/mod_usertrack.so
+LoadModule usertrack_module ${APACHE_Modules}/mod_usertrack.so

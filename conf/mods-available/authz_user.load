@@ -1,1 +1,1 @@
-LoadModule authz_user_module /usr/lib/apache2/modules/mod_authz_user.so
+LoadModule authz_user_module ${APACHE_Modules}/mod_authz_user.so

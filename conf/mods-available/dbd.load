@@ -1,1 +1,1 @@
-LoadModule dbd_module /usr/lib/apache2/modules/mod_dbd.so
+LoadModule dbd_module ${APACHE_Modules}/mod_dbd.so

@@ -1,1 +1,1 @@
-LoadModule authn_anon_module /usr/lib/apache2/modules/mod_authn_anon.so
+LoadModule authn_anon_module ${APACHE_Modules}/mod_authn_anon.so
