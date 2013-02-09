@@ -9,5 +9,6 @@
 
 users=${@/#/-u }
 
-httpd_pids=`pgrep $users httpd`
+httpd_pids=`pgrep $users 'httpd|apache2'`
+
 [ ! "$httpd_pids" ] || ps -H u -p $httpd_pids
