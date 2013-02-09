@@ -73,9 +73,8 @@ fi
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
 APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -nu`}
 
-# May evaluate to "" (quickfixed as 'nil', fixme)
+# Note: May evaluate to ""
 APACHE_HostDomain=${APACHE_HostDomain:-`hostname -d`}
-APACHE_HostDomain=${APACHE_HostDomain:-nil}
 
 APACHE_Hostname=${APACHE_Hostname:-`hostname -f`}
 APACHE_ListenPort=${APACHE_ListenPort:-8000}
@@ -106,22 +105,25 @@ CCZEBIN=`which ccze`
 # "empty env." (See $Env) :
 Environment=( StandingBear "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
 
-# fixme: Yes, no, why actually ?
-export ${Environment[@]}
-
 # Source late local environment customizations, e.g. for a chance of customizing
 # $Environment without having to mess up here :
 [ -r "$StandingBear/standingbear.epilogue.sh" ] &&
     source "$StandingBear/standingbear.epilogue.sh"
 
 #
-# Build $Env :
+# Build $Env
+#
+# Empty variables get assigned 'nil' here, for emtpy things fuck up Apache
+# conf. statements too much.
 #
 Env="env -i "
 for e in "${Environment[@]}"; do
-    v=${!e}
-    Env="$Env $e=${v:-nil}"
+    declare $e=${!e:=nil}
+    Env="$Env $e=${!e}"
 done
+
+# fixme: Yes, no, why actually ?
+export ${Environment[@]}
 
 #
 # Display environment if we're being run :
