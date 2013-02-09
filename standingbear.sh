@@ -95,6 +95,9 @@ unset basedn
 PHPBIN=${PHPBIN:-`which php`}
 PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 
+# Used in monitor_access_log.sh
+CCZEBIN=`which ccze`
+
 # Array of environment variable names that are to be imported into the
 # "empty env." (See $Env) :
 Environment=( StandingBear "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
