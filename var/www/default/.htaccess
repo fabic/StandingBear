@@ -13,7 +13,7 @@
 	IndexOptions +FancyIndexing +IgnoreCase +FoldersFirst +XHTML +HTMLTable +SuppressRules +SuppressDescription
 
 	# HIDE /theme DIRECTORY
-	IndexIgnore .htaccess /theme
+	IndexIgnore .htaccess cgi-bin /_apaxy
 
 #
 # GENERAL ICONS (BLANK, DIRECTORY, PARENT DIRECTORY)
