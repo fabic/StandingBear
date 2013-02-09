@@ -67,6 +67,14 @@ prefixed_paths "$StandingBear/local/php"
 #  *  USERDIR
 #  *  AUTOINDEX
 #
+#  * PROXY
+#  * PROXY_FTP,
+#  * PROXY_HTTP, PROXY_CONNECT,
+#  * PROXY_AJP,
+#  * PROXY_SCGI,
+#  * PROXY_BALANCER
+#
 ApacheDefines=( MANUAL ERRORDOCS INFO STATUS LANGUAGE REWRITE PHP5 PHP5_MANUAL DEFAULT_VHOST USERDIR AUTOINDEX )
+ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
 
 # vim: filetype=sh

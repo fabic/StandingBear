@@ -1,2 +1,0 @@
-# Depends: proxy
-LoadModule proxy_ajp_module ${APACHE_Modules}/mod_proxy_ajp.so
