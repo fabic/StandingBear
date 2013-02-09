@@ -1,3 +1,6 @@
 [submodule "local/h5ai"]
     path = local/h5ai
     url = git://github.com/lrsjng/h5ai.git
+[submodule "local/apigen"]
+	path = local/apigen
+	url = git://github.com/apigen/apigen.git
