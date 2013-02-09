@@ -86,11 +86,15 @@ prefixed_paths "$StandingBear/local/php"
 #  *    PROXY_BALANCER
 #  * LDAP : conf/mods-available/ldap.conf (mod_ldap & mod_authnz_ldap)
 #
+# Third-party stuff :
+#  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
+#
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST USERDIR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
 ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
 ApacheDefines=( "${ApacheDefines[@]}" LDAP )
+ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 
 # vim: filetype=sh
