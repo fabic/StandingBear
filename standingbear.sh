@@ -11,6 +11,7 @@
 # $Env is built herein and may be used for running things in an
 # uncluttered environment; See e.g. apachectl, or bin/php.
 #
+# todo: have an unexpectedly empty env var check func.
 # todo: Have ap_env_push() that may be used to customize the empty env. from prologue/epilogue.
 # todo: Removing trailling slashes from paths ?
 # todo: have a check_path_correct() func. ?
@@ -72,7 +73,10 @@ fi
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
 APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -nu`}
 
+# May evaluate to "" (quickfixed as 'nil', fixme)
 APACHE_HostDomain=${APACHE_HostDomain:-`hostname -d`}
+APACHE_HostDomain=${APACHE_HostDomain:-nil}
+
 APACHE_Hostname=${APACHE_Hostname:-`hostname -f`}
 APACHE_ListenPort=${APACHE_ListenPort:-8000}
 APACHE_ListenPortSSL=${APACHE_ListenPortSSL:-8001}
