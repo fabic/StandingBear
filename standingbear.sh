@@ -40,25 +40,25 @@ APACHE_ConfigFile=${APACHE_ConfigFile:-conf/httpd.conf}
 
 # fixme/todo: auto setup if /usr or /usr/local & if not usr, such as /opt ?
 # Ex. write a guess_apache_thing() function ?
-#APACHE_Home=${APACHE_Home:=$APACHE_ServerRoot/local/apache}
-APACHE_Home=${APACHE_Home:=/usr}
+#APACHE_Home=${APACHE_Home:-$APACHE_ServerRoot/local/apache}
+APACHE_Home=${APACHE_Home:-/usr}
 
 # Temp.: Simple paths "guessing".
 if [ "x${APACHE_Home#/usr}" == "x" ]; then
     # A typical LSB layout :
-    APACHE_Httpd=${APACHE_Httpd:=/usr/sbin/apache2}
-    APACHE_Modules=${APACHE_Modules:=/usr/lib/apache2/modules}
-    APACHE_Manual=${APACHE_Manual:=`ls -1d /usr/share/doc/apache-*/manual`}
-    APACHE_ErrorDocuments=${APACHE_ErrorDocuments:=/usr/share/apache2/error}
-    APACHE_Icons=${APACHE_Icons:=/usr/share/apache2/icons}
+    APACHE_Httpd=${APACHE_Httpd:-/usr/sbin/apache2}
+    APACHE_Modules=${APACHE_Modules:-/usr/lib/apache2/modules}
+    APACHE_Manual=${APACHE_Manual:-`ls -1d /usr/share/doc/apache-*/manual`}
+    APACHE_ErrorDocuments=${APACHE_ErrorDocuments:-/usr/share/apache2/error}
+    APACHE_Icons=${APACHE_Icons:-/usr/share/apache2/icons}
 else
     # A typical hand-built Apache installed in a dedicated location
     # such as /opt/apache-2.2.23/ :
-    APACHE_Httpd=${APACHE_Httpd:=$APACHE_Home/bin/httpd}
-    APACHE_Modules=${APACHE_Modules:=$APACHE_Home/modules}
-    APACHE_Manual=${APACHE_Manual:=$APACHE_Home/manual}
-    APACHE_ErrorDocuments=${APACHE_ErrorDocuments:=$APACHE_Home/error}
-    APACHE_Icons=${APACHE_Icons:=$APACHE_Home/icons}
+    APACHE_Httpd=${APACHE_Httpd:-$APACHE_Home/bin/httpd}
+    APACHE_Modules=${APACHE_Modules:-$APACHE_Home/modules}
+    APACHE_Manual=${APACHE_Manual:-$APACHE_Home/manual}
+    APACHE_ErrorDocuments=${APACHE_ErrorDocuments:-$APACHE_Home/error}
+    APACHE_Icons=${APACHE_Icons:-$APACHE_Home/icons}
 fi
 
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
