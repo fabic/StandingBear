@@ -9,6 +9,7 @@
 # which would have the environment setup hereinbelow be displayed.
 #
 #
+# todo: Have ap_env_push() that may be used to customize the empty env. from prologue/epilogue.
 # todo: Removing trailling slashes from paths ?
 # todo: Prepend *PATH with stuff in local/ ?
 # todo: have a check_path_correct() func. ?

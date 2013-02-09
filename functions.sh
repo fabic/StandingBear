@@ -29,11 +29,15 @@ pathappend () {
     export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
 }
 
+# End of BLFS imported stuff.
+###
+
+##
 # For prefixed-installed stuff, such as 
 #    /opt/thing-1.2.3/{bin,include,lib,share/man,share/info,...}/
 prefixed_paths () {
     local PREFIX="$1"
-    # Yes/no ?
+    # Realpath, good/bad ??
     #local PREFIX=$(cd -P "$1" && pwd)
     if [ ! -e "$PREFIX" ]; then
         #echo "$0 : Warning: \`$' prefix not found."
