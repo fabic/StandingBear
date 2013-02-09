@@ -88,7 +88,7 @@ APACHE_ModPhp5SO=${APACHE_ModPhp5SO:-$APACHE_Modules/libphp5.so}
 # See conf/mods-available/ldap.conf
 basedn=( `echo "$APACHE_HostDomain" | tr '.' ' '` ); basedn=${basedn[@]/#/dc=}; basedn=${basedn// /,};
 APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/$basedn?uid?sub?(objectClass=*)"}
-unset $basedn
+unset basedn
 
 # fixme: temp.?
 # todo: s/PHPBIN/PHP_Bin/ ?
