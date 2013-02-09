@@ -119,7 +119,8 @@ export ${Environment[@]}
 #
 Env="env -i "
 for e in "${Environment[@]}"; do
-    Env="$Env $e=${!e}"
+    v=${!e}
+    Env="$Env $e=${v:-nil}"
 done
 
 #
