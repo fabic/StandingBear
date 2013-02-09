@@ -74,7 +74,13 @@ prefixed_paths "$StandingBear/local/php"
 #  * PROXY_SCGI,
 #  * PROXY_BALANCER
 #
+#  * LDAP
+#
 ApacheDefines=( MANUAL ERRORDOCS INFO STATUS LANGUAGE REWRITE PHP5 PHP5_MANUAL DEFAULT_VHOST USERDIR AUTOINDEX )
 ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
+ApacheDefines=( "${ApacheDefines[@]}" LDAP )
+
+# If not set, base search DN is made up from the domain name we belong to :
+#APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/dc=example,dc=net?uid?sub?(objectClass=*)"}
 
 # vim: filetype=sh

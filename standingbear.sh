@@ -71,6 +71,15 @@ APACHE_ListenPortSSL=${APACHE_ListenPortSSL:-8001}
 
 APACHE_ModPhp5SO=${APACHE_ModPhp5SO:-$APACHE_Modules/libphp5.so}
 
+# Defaults LDAP URL is built with:
+#   * ldap:// scheme  (port 389)
+#   * Reaching the server from the loopback interface (hence 127.0.0.1) :
+#   * Base DN is build from the domain name broken down into Domain Components (dc=) :
+#   * Searching of everything (objectClass=*) that has an 'uid' attribute.
+basedn=( `echo "$APACHE_HostDomain" | tr '.' ' '` ); basedn=${basedn[@]/#/dc=}; basedn=${basedn// /,};
+APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/$basedn?uid?sub?(objectClass=*)"}
+unset $basedn
+
 # fixme: temp.?
 # todo: s/PHPBIN/PHP_Bin/ ?
 PHPBIN=${PHPBIN:-`which php`}
@@ -78,7 +87,7 @@ PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 
 # Array of environment variable names that are to be imported into the "empty
 # env." (See $Env) :
-Environment=( StandingBear ${!APACHE@} LANG PATH LD_LIBRARY_PATH )
+Environment=( StandingBear "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
 
 # fixme: Yes, no, why actually ?
 export ${Environment[@]}
@@ -102,7 +111,9 @@ done
 if [ `basename "$0"` == "${BASH_SOURCE[0]}" ]; then
     for e in "${Environment[@]}"; do
         echo -n '   '
-        echo $e=${!e}
-    done | column -t -s '='
+        # Using # instead of = because of the basedn of APACHE_LdapAuthURL
+        # (and the piped through column thing below) :
+        echo "$e#${!e}"
+    done | column -t -s '#'
 fi
 # vim: ts=4 filetype=sh
