@@ -43,10 +43,10 @@ Apache is run in a wiped out environment.
 
     conf/
          conf.d/
-         mods-available/ : Actual Apache module load & conf. statements.
-         mods-enabled/   (symlinks from ../mods-available/)
+         mods-available/  : Actual Apache module load & conf. statements.
+         mods-enabled/    : Symlinks from ../mods-available/
          sites-available/ : default, default-ssl, www.example.org
-         sites-enabled/  : Symlinks from ../sites-available/
+         sites-enabled/   : Symlinks from ../sites-available/
 
          httpd.conf
          httpd.local.conf
@@ -61,11 +61,11 @@ Apache is run in a wiped out environment.
         tmp/ (unused)
 
     # Where vhost's document root points at :
-        www/
-        www/default/
-        www/default/cgi-bin/
-        www/www.example.org/
-        www/www.example.org/cgi-bin/
+    var/www/
+            default/
+            default/cgi-bin/
+            www.example.org/
+            www.example.org/cgi-bin/
 
     www -> var/www/default/   (symlink)
 
@@ -74,18 +74,20 @@ Apache is run in a wiped out environment.
 Apigen.php, Apaxy, h5ai
 
     git submodule status
-    git submodule update --init --recursive
+    git submodule update --init --recursive ...
 
 
 
 ## TODO:
 
+* [ ] Move all scripts under bin/ ??
 * [x] Fix Allow from env=let_me_in
 * [x] auth_basic & LDAP...
 * [x] Userdir conf.-- suexec cgi-bin in userdirs ?
 * [ ] Maintenance mode thing ?
 * [ ] logrotate
-* [ ] README.md : Config. layout, runtime dirs, documentation.
+* [w] README.md : Config. layout, runtime dirs, documentation.
+* [ ] SSL conf. ?
 
 * [ ] Remove symlinks from Git scm.
 * [ ] local/ : Is it a good idea ?

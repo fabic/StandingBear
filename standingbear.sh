@@ -8,20 +8,26 @@
 #   $ sh standingbear.sh
 # which would have the environment setup hereinbelow be displayed.
 #
+# $Env is built herein and may be used for running things in an
+# uncluttered environment; See e.g. apachectl, or bin/php.
 #
 # todo: Have ap_env_push() that may be used to customize the empty env. from prologue/epilogue.
 # todo: Removing trailling slashes from paths ?
-# todo: Prepend *PATH with stuff in local/ ?
 # todo: have a check_path_correct() func. ?
 # todo: test/debug if spaces in paths.
+# todo: chdir bef exec ?
 #
+
+# For scripts to have their location at hands-reach :
 HERE=$( cd `dirname "$0"` && pwd )
 
+# Prevent from being included several times :
 [ "x$StandingBear" != "x" ] && return
 
+# Whence we stand :
 StandingBear=$( cd `dirname "${BASH_SOURCE[0]}"` && pwd )
 
-
+# Utility functions :
 source "$StandingBear/functions.sh"
 
 pathprepend "$StandingBear/bin"
@@ -32,7 +38,7 @@ pathprepend "$StandingBear/bin"
 
 LANG=${LANG:-C}
 
-#unset SSH_CLIENT
+# See conf/httpd.local.conf about Apache env. var. `let_me_in` :
 APACHE_AdminIp=${APACHE_AdminIp:-${SSH_CLIENT%% *}}
 APACHE_AdminIp=${APACHE_AdminIp:-127.0.0.1}
 
@@ -44,7 +50,7 @@ APACHE_ConfigFile=${APACHE_ConfigFile:-conf/httpd.conf}
 #APACHE_Home=${APACHE_Home:-$APACHE_ServerRoot/local/apache}
 APACHE_Home=${APACHE_Home:-/usr}
 
-# Temp.: Simple paths "guessing".
+# fixme: temp.: Simple Apache paths "guessing".
 if [ "x${APACHE_Home#/usr}" == "x" ]; then
     # A typical LSB layout :
     APACHE_Httpd=${APACHE_Httpd:-/usr/sbin/apache2}
@@ -62,6 +68,7 @@ else
     APACHE_Icons=${APACHE_Icons:-$APACHE_Home/icons}
 fi
 
+# todo: change case (_RunUser, _RunGroup).
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
 APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -nu`}
 
@@ -70,6 +77,7 @@ APACHE_Hostname=${APACHE_Hostname:-`hostname -f`}
 APACHE_ListenPort=${APACHE_ListenPort:-8000}
 APACHE_ListenPortSSL=${APACHE_ListenPortSSL:-8001}
 
+# See conf/mods-available/php5.conf
 APACHE_ModPhp5SO=${APACHE_ModPhp5SO:-$APACHE_Modules/libphp5.so}
 
 # Defaults LDAP URL is built with:
@@ -77,6 +85,7 @@ APACHE_ModPhp5SO=${APACHE_ModPhp5SO:-$APACHE_Modules/libphp5.so}
 #   * Reaching the server from the loopback interface (hence 127.0.0.1) :
 #   * Base DN is build from the domain name broken down into Domain Components (dc=) :
 #   * Searching of everything (objectClass=*) that has an 'uid' attribute.
+# See conf/mods-available/ldap.conf
 basedn=( `echo "$APACHE_HostDomain" | tr '.' ' '` ); basedn=${basedn[@]/#/dc=}; basedn=${basedn// /,};
 APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/$basedn?uid?sub?(objectClass=*)"}
 unset $basedn
@@ -86,14 +95,15 @@ unset $basedn
 PHPBIN=${PHPBIN:-`which php`}
 PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 
-# Array of environment variable names that are to be imported into the "empty
-# env." (See $Env) :
+# Array of environment variable names that are to be imported into the
+# "empty env." (See $Env) :
 Environment=( StandingBear "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
 
 # fixme: Yes, no, why actually ?
 export ${Environment[@]}
 
-# Source late local environment customizations :
+# Source late local environment customizations, e.g. for a chance of customizing
+# $Environment without having to mess up here :
 [ -r "$StandingBear/standingbear.epilogue.sh" ] &&
     source "$StandingBear/standingbear.epilogue.sh"
 
