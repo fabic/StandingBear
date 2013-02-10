@@ -35,13 +35,13 @@
 	<Directory "${APACHE_ServerRoot}/www/default/dav/">
 		Options Indexes
 		Order allow,deny
-		Allow from env=let_me_in
 
 		Dav On
 
 		AuthType Basic
 		AuthName "DAV"
 		AuthBasicProvider ldap1
+		Require valid-user
 
 		<LimitExcept GET OPTIONS>
 			Require user admin
