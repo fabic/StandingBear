@@ -1,10 +1,9 @@
-#<VirtualHost *:80>
 <IfDefine DEFAULT_VHOST>
 <VirtualHost *:${APACHE_ListenPort}>
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	#DocumentRoot "${APACHE_ServerRoot}/var/www/default"
-	DocumentRoot "${APACHE_ServerRoot}/www"
+	DocumentRoot "${APACHE_ServerRoot}/www/default/htdocs"
+	#DocumentRoot "${APACHE_ServerRoot}/www"
 
     DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
     #DirectoryIndex /_h5ai/server/php/index.php
@@ -14,7 +13,7 @@
 		AllowOverride None
 	</Directory>
 
-	<Directory "${APACHE_ServerRoot}/www">
+	<Directory "${APACHE_ServerRoot}/www/default/htdocs">
 		Options Indexes FollowSymLinks MultiViews
 		#AllowOverride None
 		AllowOverride All
@@ -23,8 +22,8 @@
 		allow from all
 	</Directory>
 
-	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/var/www/default/cgi-bin/"
-	<Directory "${APACHE_ServerRoot}/var/www/default/cgi-bin/">
+	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/default/cgi-bin/"
+	<Directory "${APACHE_ServerRoot}/www/default/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny

@@ -1,27 +1,26 @@
 # F.2013-02-06
 
 <VirtualHost *:${APACHE_ListenPort}>
-    #ServerName ${APACHE_Hostname}
     ServerName www.example.org
 
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	DocumentRoot "${APACHE_ServerRoot}/var/www/www.example.org"
+	DocumentRoot "${APACHE_ServerRoot}/www/www.example.org/htdocs"
 
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
 
-	<Directory "${APACHE_ServerRoot}/var/www/www.example.org">
+	<Directory "${APACHE_ServerRoot}/www/www.example.org/htdocs">
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride None
 		Order allow,deny
 		allow from all
 	</Directory>
 
-	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/var/www/www.example.org/cgi-bin/"
-	<Directory "${APACHE_ServerRoot}/var/www/www.example.org/cgi-bin/">
+	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/www.example.org/cgi-bin/"
+	<Directory "${APACHE_ServerRoot}/www/www.example.org/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny
