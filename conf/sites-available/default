@@ -35,6 +35,7 @@
 	<Directory "${APACHE_ServerRoot}/www/default/dav/">
 		Options Indexes
 		Order allow,deny
+		Allow from all
 
 		Dav On
 
