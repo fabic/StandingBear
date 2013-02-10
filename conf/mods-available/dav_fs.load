@@ -1,2 +1,0 @@
-# Depends: dav
-LoadModule dav_fs_module ${APACHE_Modules}/mod_dav_fs.so

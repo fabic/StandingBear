@@ -85,6 +85,7 @@ prefixed_paths "$StandingBear/local/php"
 #  *    PROXY_AJP, PROXY_SCGI,
 #  *    PROXY_BALANCER
 #  * LDAP : conf/mods-available/ldap.conf (mod_ldap & mod_authnz_ldap)
+#  * DAV  : conf/mods-available/dav.conf
 #
 # Third-party stuff :
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
@@ -96,5 +97,6 @@ ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
 ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
 ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
+ApacheDefines=( "${ApacheDefines[@]}" DAV )
 
 # vim: filetype=sh

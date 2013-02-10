@@ -30,6 +30,25 @@
 		Allow from all
 	</Directory>
 
+<IfDefine DAV>
+	Alias /dav "${APACHE_ServerRoot}/www/default/dav/"
+	<Directory "${APACHE_ServerRoot}/www/default/dav/">
+		Options Indexes
+		Order allow,deny
+		Allow from env=let_me_in
+
+		Dav On
+
+		AuthType Basic
+		AuthName "DAV"
+		AuthBasicProvider ldap1
+
+		<LimitExcept GET OPTIONS>
+			Require user admin
+		</LimitExcept>
+	</Directory>
+</IfDefine>
+
 	#ErrorLog var/log/error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
