@@ -56,18 +56,20 @@ Apache is run in a wiped out environment.
 
     var/
         lock/
+            DAVLock/
         log/
         run/
         tmp/ (unused)
 
     # Where vhost's document root points at :
-    var/www/
-            default/
-            default/cgi-bin/
-            www.example.org/
-            www.example.org/cgi-bin/
-
-    www -> var/www/default/   (symlink)
+    www/
+        default/
+                cgi-bin/
+                dav/
+                htdocs/
+        www.example.org/
+                cgi-bin/
+                htdocs/
 
 ## Included stuff as Git submodules :
 
@@ -80,43 +82,52 @@ Apigen.php, Apaxy, h5ai
 
 ## TODO:
 
+* [w] README.md : Config. layout, runtime dirs, documentation.
 * [ ] Move all scripts under bin/ ??
 * [x] Fix Allow from env=let_me_in
-* [x] auth_basic & LDAP...
-* [x] Userdir conf.-- suexec cgi-bin in userdirs ?
 * [ ] Maintenance mode thing ?
 * [ ] logrotate
-* [w] README.md : Config. layout, runtime dirs, documentation.
 * [ ] SSL conf. ?
 * [ ] /robots.txt? (incl. search engine stuff..)
-* [ ] mod_tidy
-
+* [ ] The missing favicon.ico
 * [ ] Remove symlinks from Git scm.
 * [ ] local/ : Is it a good idea ?
 * [ ]   » Sh script for symlinking stuff in local/apache_symlinks/ & local/php_symlinks/ ?
 * [ ] ccze, AwStats...
+* [ ] Gitweb ?
+
+### PHP
 
 * [w] PHP 5.3, 5.4 (Apache mod_php, cgi, [ ] suexec-ed, fastcgi ?)
-    -   http://www.askapache.com/php/custom-phpini-tips-and-tricks.html
-    -   http://php.net/manual/en/configuration.changes.php
+    -   <http://www.askapache.com/php/custom-phpini-tips-and-tricks.html>
+    -   <http://php.net/manual/en/configuration.changes.php>
 * [ ] PHP as cgi script samples
 * [ ] mod_suPHP ?
+* [ ] Apigen script for e.g. generating documentation from symlinks in, say, php/sources_symlinks/, into .e.g. www/default/doc/apigen-ed/
+* [ ] wkhtmltopdf, dompdf
 
+### Misc.
 * [x] Tomcat AJP
-* [ ] mod_DAV ?
-* [ ] Gitweb ?
 * [ ] Ruby
 * [ ] Python, incl. fastcgi, wsgi? ...
 * [ ] Perl
 * [ ] Node.js ?!
-* [ ] wkhtmltopdf, dompdf
 * [ ] Find/write ([ ] extend h5ai) a GitHub-like thing for displaying .md, .rst and such...
+
+### Apache modules
+
+* [x] mod_DAV ?
+* [x]   » for userdirs! e.g. ~/public_html/dav or ~/dav/ ?
+* [x] auth_basic & LDAP...
+* [x] Userdir conf.-- suexec cgi-bin in userdirs ?
+* [ ] mod_tidy
 * [ ] mod rewrite "templates" / typical stuff...
 * [ ] mod_security, www-apache/modsecurity-crs (Core Rule Set)
 * [ ] mod evasive ?
-* [ ] www-apache/mod_musicindex
+* [ ] www-apache/mod_musicindex <http://hacks.slashdirt.org/musicindex/>
 * [ ] mod_fcgid vs mod_fastcgi
 * [ ] mod_dav_svn
 * [ ] www-apache/mod_bw (http://www.ivn.cl/apache/)
 * [ ] www-apache/mod_loadavg 
-* [ ] www-apache/mod_proxy_html
+* [ ] www-apache/mod_proxy_html <http://apache.webthing.com/mod_proxy_html/>
+* [ ] <http://anyterm.org/>
