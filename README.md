@@ -88,6 +88,8 @@ Apigen.php, Apaxy, h5ai
 * [ ] logrotate
 * [w] README.md : Config. layout, runtime dirs, documentation.
 * [ ] SSL conf. ?
+* [ ] /robots.txt? (incl. search engine stuff..)
+* [ ] mod_tidy
 
 * [ ] Remove symlinks from Git scm.
 * [ ] local/ : Is it a good idea ?
@@ -98,15 +100,23 @@ Apigen.php, Apaxy, h5ai
     -   http://www.askapache.com/php/custom-phpini-tips-and-tricks.html
     -   http://php.net/manual/en/configuration.changes.php
 * [ ] PHP as cgi script samples
+* [ ] mod_suPHP ?
 
 * [x] Tomcat AJP
 * [ ] mod_DAV ?
 * [ ] Gitweb ?
 * [ ] Ruby
-* [ ] Python, incl. fastcgi...
+* [ ] Python, incl. fastcgi, wsgi? ...
 * [ ] Perl
 * [ ] Node.js ?!
 * [ ] wkhtmltopdf, dompdf
 * [ ] Find/write ([ ] extend h5ai) a GitHub-like thing for displaying .md, .rst and such...
 * [ ] mod rewrite "templates" / typical stuff...
+* [ ] mod_security, www-apache/modsecurity-crs (Core Rule Set)
 * [ ] mod evasive ?
+* [ ] www-apache/mod_musicindex
+* [ ] mod_fcgid vs mod_fastcgi
+* [ ] mod_dav_svn
+* [ ] www-apache/mod_bw (http://www.ivn.cl/apache/)
+* [ ] www-apache/mod_loadavg 
+* [ ] www-apache/mod_proxy_html
