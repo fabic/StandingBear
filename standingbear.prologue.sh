@@ -89,6 +89,7 @@ prefixed_paths "$StandingBear/local/php"
 #
 # Third-party stuff :
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
+#  * MARKDOWN
 #
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST USERDIR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
@@ -98,5 +99,6 @@ ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT P
 ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 ApacheDefines=( "${ApacheDefines[@]}" DAV )
+ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
 
 # vim: filetype=sh
