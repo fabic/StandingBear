@@ -7,3 +7,6 @@
 [submodule "local/Apaxy"]
 	path = local/Apaxy
 	url = git://github.com/AdamWhitcroft/Apaxy.git
+[submodule "local/php-markdown"]
+	path = local/php-markdown
+	url = git://github.com/michelf/php-markdown.git
