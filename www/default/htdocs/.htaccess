@@ -1,3 +1,26 @@
+#
+# mod_rewrite related stuff.
+#
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    #
+    # Markdown rendering of .md & .markdown files ; depends on
+    # local/php-markdown library.
+    #
+    <IfDefine MARKDOWN>
+        #RewriteRule ^(.*\.md)$ markdown.php?file=$1 [QSA,L]
+        RewriteCond $2 =.md [OR]
+        RewriteCond $2 =.markdown
+        RewriteRule ^(.*)(\..+)$ markdown.php?file=$0 [QSA,L]
+    </IfDefine>
+</IfModule>
+
+#
+# mod_autoindex theming.
+#
+# See local/Apaxy/apaxy/htaccess.txt
+#
 <IfDefine AI_APAXY>
 #
 # Apaxy by @adamwhitcroft
