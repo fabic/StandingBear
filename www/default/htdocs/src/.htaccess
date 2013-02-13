@@ -1,0 +1,11 @@
+#DefaultType text/plain
+#ForceType text/plain
+
+# Fixme: move it somewhere else so that we can use ForceType, e.g.
+# up a level, or in a <location /src/> block.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    #RewriteCond ${REQUEST_FILENAME} -f
+    RewriteRule ^(.*\.php)$ highlight.php?file=$1 [QSA,L]
+</IfModule>
+
