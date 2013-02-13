@@ -8,6 +8,8 @@
  *
  * todo: Silex it ?
  *
+ * Fixme: How do we guess the input file charset ?
+ *
  * @See http://michelf.ca/projects/php-markdown/
  * @See http://michelf.ca/projects/php-markdown/extra/
  */
@@ -50,6 +52,7 @@ $pageTitle = htmlentities(basename($file))
 <html>
 <head>
     <title><?php echo $pageTitle?></title>
+    <meta charset='utf-8'>
     <style type='text/css'>
     .sb_heading {
         font-size: .8em;
