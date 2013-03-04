@@ -71,7 +71,7 @@ fi
 
 # todo: change case (_RunUser, _RunGroup).
 APACHE_RUN_USER=${APACHE_RUN_USER:-`id -nu`}
-APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -nu`}
+APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-`id -ng`}
 
 # Note: May evaluate to ""
 APACHE_HostDomain=${APACHE_HostDomain:-`hostname -d`}
