@@ -95,24 +95,39 @@ Apigen.php, Apaxy, h5ai
 * [ ]   » Sh script for symlinking stuff in local/apache_symlinks/ & local/php_symlinks/ ?
 * [ ] ccze, AwStats...
 * [ ] Gitweb ?
+* [ ] "online source browser" : find an "on-the-fly" syntax highlighter for prog./markup languages.
+* [ ] Have a /_sb/ for anything StandingBear specifics, basically the whole default site thing maybe.. 
 
 ### PHP
 
+* [ ] Alias /phpinfo to /phpinfo.php ?
+* [ ] Simple StandingBear config. check script, e.g. :
+    - [ ] Correct php.ini loaded ;
+    - [ ] Dumping environment variables ;
+    - [ ] Dumping whole Apache config. ;
+    - [ ] .. Or a simple config. browser setup ? E.g. alias /conf/ to conf/ ?
 * [w] PHP 5.3, 5.4 (Apache mod_php, cgi, [ ] suexec-ed, fastcgi ?)
     -   <http://www.askapache.com/php/custom-phpini-tips-and-tricks.html>
     -   <http://php.net/manual/en/configuration.changes.php>
 * [ ] PHP as cgi script samples
 * [ ] mod_suPHP ?
+* [w] Markdown filter <http://michelf.ca/projects/php-markdown/>
 * [ ] Apigen script for e.g. generating documentation from symlinks in, say, php/sources_symlinks/, into .e.g. www/default/doc/apigen-ed/
+    - [ ] <http://strapdownjs.com/> : Client-side Markdown rendering.
+* [ ] Silex-based thing for rendering stuff ?
+* [ ] PHPUML
 * [ ] wkhtmltopdf, dompdf
+* [ ] xdebug conf., e.g. xdebug.manual_url
 
 ### Misc.
 * [x] Tomcat AJP
-* [ ] Ruby
+* [ ] Ruby 1.8 / 1.9, mod_ruby, fastcgi-ed
 * [ ] Python, incl. fastcgi, wsgi? ...
 * [ ] Perl
 * [ ] Node.js ?!
 * [ ] Find/write ([ ] extend h5ai) a GitHub-like thing for displaying .md, .rst and such...
+* [ ] Sphinx <http://sphinx-doc.org/>
+* [ ] Redmine ?
 
 ### Apache modules
 
