@@ -28,6 +28,9 @@ HERE=$( cd `dirname "$0"` && pwd )
 # Whence we stand :
 StandingBear=$( cd `dirname "${BASH_SOURCE[0]}"` && pwd )
 
+# URL space where to make available our stuff :
+_SB=${_SB:-/_sb}
+
 # Utility functions :
 source "$StandingBear/functions.sh"
 
@@ -103,7 +106,7 @@ CCZEBIN=`which ccze`
 
 # Array of environment variable names that are to be imported into the
 # "empty env." (See $Env) :
-Environment=( StandingBear "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
+Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
 
 # Source late local environment customizations, e.g. for a chance of customizing
 # $Environment without having to mess up here :

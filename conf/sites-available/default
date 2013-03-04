@@ -51,19 +51,6 @@
 </IfDefine>
 
 
-	# Apache conf/ exposed !
-	#<IfDefine ...> todo?
-	Alias /conf "${APACHE_ServerRoot}/conf/"
-	<Directory "${APACHE_ServerRoot}/conf/">
-		Options Indexes FollowSymLinks
-		AllowOverride None
-		Order deny,allow
-        Deny from all
-        #Allow from 127.0.0.1 ::1
-		Allow from env=let_me_in
-	</Directory>
-	#</IfDefine>
-
 
     #
     # Maintenance mode : Enabled if file maintenance-mode-on exists.
