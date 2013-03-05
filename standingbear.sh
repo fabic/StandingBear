@@ -85,6 +85,10 @@ APACHE_ListenPortSSL=${APACHE_ListenPortSSL:-8001}
 
 # See conf/mods-available/php5.conf
 APACHE_ModPhp5SO=${APACHE_ModPhp5SO:-$APACHE_Modules/libphp5.so}
+# If it's not an absolute path, prepend Apache modules path :
+if [ "x${APACHE_ModPhp5SO##/*}" != "x" ]; then
+    APACHE_ModPhp5SO="$APACHE_Modules/$APACHE_ModPhp5SO"
+fi
 
 # Defaults LDAP URL is built with:
 #   * ldap:// scheme  (port 389)
