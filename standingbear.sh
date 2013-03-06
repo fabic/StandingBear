@@ -28,9 +28,6 @@ HERE=$( cd `dirname "$0"` && pwd )
 # Whence we stand :
 StandingBear=$( cd `dirname "${BASH_SOURCE[0]}"` && pwd )
 
-# URL space where to make available our stuff :
-_SB=${_SB:-/_sb}
-
 # Utility functions :
 source "$StandingBear/functions.sh"
 
@@ -39,6 +36,9 @@ pathprepend "$StandingBear/bin"
 # Source early local environment customizations :
 [ -r "$StandingBear/standingbear.prologue.sh" ] &&
     source "$StandingBear/standingbear.prologue.sh"
+
+# URL space where to make available our stuff :
+_SB=${_SB:-/_sb}
 
 LANG=${LANG:-C}
 
