@@ -128,6 +128,8 @@ Apigen.php, Apaxy, h5ai
 * [ ] Find/write ([ ] extend h5ai) a GitHub-like thing for displaying .md, .rst and such...
 * [ ] Sphinx <http://sphinx-doc.org/>
 * [ ] Redmine ?
+* [ ] Twitter's Bootstrap-ed ?
+* [ ] Blueprint-CSS ?
 
 ### Apache modules
 
