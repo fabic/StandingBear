@@ -1,20 +1,39 @@
 #
 # File: conf/conf.d/standingbear
 #
+<IfDefine STANDINGBEAR>
 
-#
-# Expose configuration, e.g. /_sb/conf/
-#
-#<IfDefine ...> TODO!
+    #
+    # Expose configuration, e.g. /_sb/conf/
+    #
     Alias ${_SB}/conf "${APACHE_ServerRoot}/conf/"
     <Directory "${APACHE_ServerRoot}/conf/">
         Options Indexes FollowSymLinks
         AllowOverride None
         Order deny,allow
         Deny from all
-        #Allow from 127.0.0.1 ::1
         Allow from env=let_me_in
     </Directory>
-#</IfDefine>
 
+    #
+    # CGI-BINs
+    #
+    ScriptAlias ${_SB}/cgi-bin/ "${APACHE_ServerRoot}/www/_sb/cgi-bin/"
+    <Directory "${APACHE_ServerRoot}/www/_sb/cgi-bin/">
+    AllowOverride None
+    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+    Order allow,deny
+    Allow from all
+    </Directory>
+
+    Alias ${_SB} "${APACHE_ServerRoot}/www/_sb/htdocs/"
+    <Directory "${APACHE_ServerRoot}/www/_sb/htdocs/">
+        Options Indexes SymLinksIfOwnerMatch
+        AllowOverride None
+        Order deny,allow
+        Deny from all
+        Allow from env=let_me_in
+    </Directory>
+
+</IfDefine>
 # vim: ts=4 filetype=apache

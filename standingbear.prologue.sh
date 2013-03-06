@@ -88,10 +88,12 @@ prefixed_paths "$StandingBear/local/php"
 #  * DAV  : conf/mods-available/dav.conf
 #
 # Third-party stuff :
+#  * STANDINGBEAR : Enable StandingBear stuff under $_SB (e.g. /_sb/)
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
 #  * MARKDOWN
 #
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST )
+ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
