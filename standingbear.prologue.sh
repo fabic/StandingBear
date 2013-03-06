@@ -4,19 +4,35 @@
 # This file is sourced *early* by standingbear.sh, unasigned environment
 # variables then get their defaults.
 #
+# Custom environment variables may be defined here, see also
+# standingbear.epilogue.sh for a chance to pass them to the
+# wiped out environment Apache gets run with.
+#
+# Already defined when this file get sourced are :
+#   * $StandingBear : Absolute path to standingbear.sh stands.
+#   * $HERE : Absolute path of the executing script that sourced standingbear.sh
+#   * *PATH toolkit : pathappend(), pathprepend(), pathremove(), prefixed_paths()
+#
 
-# Default to the current user :
+# Sample custom env. var. defined here, but actually added to
+# the $Environment bash array in standingbear.epilogue.sh :
+#GIT_PROJECTS_ROOT="$StandingBear/git_repositories"
+
+# Default to the current user (`id -un` & `id -gn`) :
 #APACHE_RUN_USER=www-data
 #APACHE_RUN_GROUP=www-data
 
+# Typically used in vhost definition files,
+# see conf/sites-available/ & conf/ports.conf 
 #APACHE_Hostname=example.org
 #APACHE_ListenPort=8000
 #APACHE_ListenPortSSL=8001
 
 # For hand-compiled stuff, e.g. with ./configure --prefix=/opt/httpd-2.2.23/ ...
 # notably PATH would be prepended with /opt/httpd-2.2.23/bin.
-prefixed_paths "$StandingBear/local/apache"
-prefixed_paths "$StandingBear/local/php"
+#prefixed_paths "$StandingBear/local/apache"
+#prefixed_paths "$StandingBear/local/php"
+#prefixed_paths "/opt/php-5.3.13"
 
 # Defaults to $SSH_CLIENT if defined! Else 127.0.0.1
 #
@@ -48,7 +64,8 @@ prefixed_paths "$StandingBear/local/php"
 #APACHE_ErrorDocuments=/usr/share/apache2/error
 #APACHE_Icons=/usr/share/apache2/icons
 
-# Defaults to libphp5.so :
+# Defaults to libphp5.so, may be an absolute path, else it ends up
+# prepended with $APACHE_Modules.
 #APACHE_ModPhp5SO=libphp5.so.5.3
 #APACHE_ModPhp5SO=libphp5.so.5.4
 

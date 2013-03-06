@@ -9,6 +9,41 @@ Apache is run in a wiped out environment.
 
     git clone git://github.com/Oeil-de-nuit/StandingBear.git
 
+## Configuration :
+
+Configuration consists in :
+
+* Wiped out environment setup, see [standingbear.prologue.sh][1] & [standingbear.epilogue.sh][2] ;
+* Apache defines for enabling functionalities ;
+* Defining vhost(s), see e.g. [conf/sites-available/default][3] ;
+* [conf/httpd.conf][4] & [conf/httpd.local.conf][5] ;
+
+Default environment without configuration would usually end up like :
+
+	StandingBear           /home/fabi/dev/standingbear
+	_SB                    /_sb
+	APACHE_AdminIp         127.0.0.1
+	APACHE_ConfigFile      conf/httpd.conf
+	APACHE_ErrorDocuments  /usr/share/apache2/error
+	APACHE_Home            /usr
+	APACHE_HostDomain      me
+	APACHE_Hostname        randombinarythoughts.com
+	APACHE_Httpd           /usr/sbin/apache2
+	APACHE_Icons           /usr/share/apache2/icons
+	APACHE_LdapAuthURL     ldap://127.0.0.1:389/dc=randombinarythoughts,dc=com?uid?sub?(objectClass=*)
+	APACHE_ListenPort      8000
+	APACHE_ListenPortSSL   8001
+	APACHE_Manual          /usr/share/doc/apache-2.2.24/manual
+	APACHE_ModPhp5SO       /usr/lib/apache2/modules/libphp5.so
+	APACHE_Modules         /usr/lib/apache2/modules
+	APACHE_RUN_GROUP       fabi
+	APACHE_RUN_USER        fabi
+	APACHE_ServerRoot      /home/fabi/dev/standingbear
+	LANG                   en_US.UTF-8
+	PATH                   /home/fabi/dev/standingbear/bin:/home/fabi/bin:/opt/bin:/usr/local/bin:/usr/bin:/bin
+	LD_LIBRARY_PATH        nil
+
+
 ## Usage
 
     # Output the environment Apache would be run with :
@@ -16,7 +51,11 @@ Apache is run in a wiped out environment.
 
     # Apache configuration test :
     ./apachectl -t
+    
+    # Basic virtual hosts info.
     ./apachectl -S
+
+    # List static & shared modules.
     ./apachectl -M
 
     # Customization may be done in standingbear.prologue.sh and consists in
@@ -24,7 +63,7 @@ Apache is run in a wiped out environment.
     # files.
 
     # Or from a prompt, e.g. :
-    APACHE_ListenPort=1234 \
+    APACHE_ListenPort=8000 \
     APACHE_Modules=/usr/lib/apache2/modules \
     APACHE_ModPhp5SO=/usr/lib/apache2/modules/libphp5.so.5.4 \
         ./apachectl -t
@@ -63,10 +102,16 @@ Apache is run in a wiped out environment.
 
     # Where vhost's document root points at :
     www/
+    	# Not an actual vhost, see conf/conf.d/standingbear for the Alias directives.
+    	_sb/
+                cgi-bin/
+                htdocs/
+
         default/
                 cgi-bin/
                 dav/
                 htdocs/
+
         www.example.org/
                 cgi-bin/
                 htdocs/
@@ -85,22 +130,21 @@ Apigen.php, Apaxy, h5ai
 * [w] README.md : Config. layout, runtime dirs, documentation.
 * [ ] Move all scripts under bin/ ??
 * [x] Fix Allow from env=let_me_in
-* [ ] Maintenance mode thing ?
+* [x] Maintenance mode thing ?
 * [ ] logrotate
 * [ ] SSL conf. ?
 * [ ] /robots.txt? (incl. search engine stuff..)
 * [ ] The missing favicon.ico
 * [ ] Remove symlinks from Git scm.
-* [ ] local/ : Is it a good idea ?
+* [ ] local/ : Is it a good idea ? --> rename to vendor/ ?
 * [ ]   » Sh script for symlinking stuff in local/apache_symlinks/ & local/php_symlinks/ ?
 * [ ] ccze, AwStats...
 * [ ] Gitweb ?
 * [ ] "online source browser" : find an "on-the-fly" syntax highlighter for prog./markup languages.
-* [ ] Have a /_sb/ for anything StandingBear specifics, basically the whole default site thing maybe.. 
+* [x] Have a /_sb/ for anything StandingBear specifics, basically the whole default site thing maybe.. 
 
 ### PHP
 
-* [ ] Alias /phpinfo to /phpinfo.php ?
 * [ ] Simple StandingBear config. check script, e.g. :
     - [ ] Correct php.ini loaded ;
     - [ ] Dumping environment variables ;
@@ -148,3 +192,9 @@ Apigen.php, Apaxy, h5ai
 * [ ] www-apache/mod_loadavg 
 * [ ] www-apache/mod_proxy_html <http://apache.webthing.com/mod_proxy_html/>
 * [ ] <http://anyterm.org/>
+
+[1]: Oeil-de-nuit/StandingBear/blob/master/standingbear.prologue.sh
+[2]: Oeil-de-nuit/StandingBear/blob/master/standingbear.epilogue.sh
+[3]: Oeil-de-nuit/StandingBear/blob/master/conf/sites-available/default
+[4]: Oeil-de-nuit/StandingBear/blob/master/conf/httpd.conf
+[5]: Oeil-de-nuit/StandingBear/blob/master/conf/httpd.local/conf
