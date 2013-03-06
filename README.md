@@ -193,8 +193,8 @@ Apigen.php, Apaxy, h5ai
 * [ ] www-apache/mod_proxy_html <http://apache.webthing.com/mod_proxy_html/>
 * [ ] <http://anyterm.org/>
 
-[1]: Oeil-de-nuit/StandingBear/blob/master/standingbear.prologue.sh
-[2]: Oeil-de-nuit/StandingBear/blob/master/standingbear.epilogue.sh
-[3]: Oeil-de-nuit/StandingBear/blob/master/conf/sites-available/default
-[4]: Oeil-de-nuit/StandingBear/blob/master/conf/httpd.conf
-[5]: Oeil-de-nuit/StandingBear/blob/master/conf/httpd.local/conf
+[1]: standingbear.prologue.sh
+[2]: standingbear.epilogue.sh
+[3]: conf/sites-available/default
+[4]: conf/httpd.conf
+[5]: conf/httpd.local.conf
