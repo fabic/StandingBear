@@ -162,6 +162,7 @@ Apigen.php, Apaxy, h5ai
 * [ ] PHPUML
 * [ ] wkhtmltopdf, dompdf
 * [ ] xdebug conf., e.g. xdebug.manual_url
+* [ ] Find something for generating/displaying a nice searchable output of PHP's manual.
 
 ### Misc.
 * [x] Tomcat AJP
