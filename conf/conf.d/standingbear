@@ -29,7 +29,7 @@
     Alias ${_SB} "${APACHE_ServerRoot}/www/_sb/htdocs/"
     <Directory "${APACHE_ServerRoot}/www/_sb/htdocs/">
         Options Indexes SymLinksIfOwnerMatch
-        AllowOverride None
+        AllowOverride All
         Order deny,allow
         Deny from all
         Allow from env=let_me_in
