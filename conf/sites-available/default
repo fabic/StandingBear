@@ -61,6 +61,7 @@
     RewriteEngine On
     RewriteCond %{DOCUMENT_ROOT}/maintenance-mode-on -f
     RewriteCond %{ENV:let_me_in} =""
+    RewriteCond %{REQUEST_URI} !>${_SB}
     RewriteRule !^/maintenance-in-progress/.*$ /maintenance-in-progress/ [R=307,L]
     </IfModule>
 

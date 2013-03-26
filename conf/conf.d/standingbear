@@ -35,5 +35,15 @@
         Allow from env=let_me_in
     </Directory>
 
+    #
+    # MAINTENANCE MODE ALIAS
+    #
+    Alias /maintenance-in-progress "${APACHE_ServerRoot}/www/_sb/htdocs/maintenance-in-progress/"
+    <Directory "${APACHE_ServerRoot}/www/_sb/htdocs/maintenance-in-progress/">
+        Options Indexes SymLinksIfOwnerMatch
+        AllowOverride None
+	Order allow,deny
+	Allow from all
+    </Directory>
 </IfDefine>
 # vim: ts=4 filetype=apache
