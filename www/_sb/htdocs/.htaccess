@@ -12,7 +12,7 @@
         #RewriteRule ^(.*\.md)$ markdown.php?file=$1 [QSA,L]
         RewriteCond $2 =.md [OR]
         RewriteCond $2 =.markdown
-        RewriteRule ^(.*)(\..+)$ markdown.php?file=$0 [QSA,L]
+        RewriteRule ^(.*)(\..+)$ ${_SB}/markdown.php?file=$0 [QSA,L]
     </IfDefine>
 </IfModule>
 
