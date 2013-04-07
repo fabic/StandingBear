@@ -6,7 +6,7 @@
 # todo: Prepend *PATH with stuff in local/ ?
 # todo: have a check_path_correct() func. ?
 #
-source `dirname "$0"`/standingbear.sh
+source `dirname $(realpath "$0")`/standingbear.sh
 
 # TEMP... 
 echo Environment :
