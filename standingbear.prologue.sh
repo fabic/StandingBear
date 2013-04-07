@@ -73,6 +73,12 @@
 #APACHE_ModPhp5SO=/usr/lib/php5.3/apache2/libphp5.so
 #APACHE_ModPhp5SO=/usr/lib/php5.4/apache2/libphp5.so
 
+# E.g. hand-built PHP in /opt :
+#APACHE_ModPhp5SO=/opt/php-5.3.23/lib/libphp5.so
+
+# PHP binary path :
+#PHPBIN=/opt/php-5.3.23/bin/php
+
 # If not set, base search DN is made up from the domain name we belong to :
 #APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/dc=example,dc=net?uid?sub?(objectClass=*)"}
 
