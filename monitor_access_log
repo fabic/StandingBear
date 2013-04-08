@@ -4,7 +4,7 @@
 #
 # Arguments: [<tail_argument1>, ...] -- [<ignore_regex1>, ...]
 #
-source `dirname "$0"`/standingbear.sh
+source `dirname $(realpath "$0")`/standingbear.sh
 
 ##
 #
