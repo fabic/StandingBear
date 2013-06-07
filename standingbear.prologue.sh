@@ -119,6 +119,8 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  *    PROXY_BALANCER
 #  * LDAP : conf/mods-available/ldap.conf (mod_ldap & mod_authnz_ldap)
 #  * DAV  : conf/mods-available/dav.conf
+#  * GIT_HTTP_BACKEND : conf/mods-available/git-http-backend.conf
+#  * GITWEB : conf/mods-available/gitweb.conf
 #
 # Third-party stuff :
 #  * STANDINGBEAR : Enable StandingBear stuff under $_SB (e.g. /_sb/)
@@ -138,5 +140,6 @@ ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
 #ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
 ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
+ApacheDefines=( "${ApacheDefines[@]}" GITWEB )
 
 # vim: filetype=sh
