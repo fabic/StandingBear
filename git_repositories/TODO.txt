@@ -1,0 +1,4 @@
+Write a script for searching & symlinking Git repositories in here.
+
+Ex.: find_and_symlink.sh ~/symfony2-app/vendor/
+   that would e.g. find -type d -name *.git

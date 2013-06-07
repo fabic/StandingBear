@@ -16,6 +16,7 @@
 
 # Sample custom env. var. defined here, but actually added to
 # the $Environment bash array in standingbear.epilogue.sh :
+# TODO: find another name for that sample env...
 #GIT_PROJECTS_ROOT="$StandingBear/git_repositories"
 
 # Default to the current user (`id -un` & `id -gn`) :
@@ -88,7 +89,7 @@ APACHE_ModPassenger_Root=`ls -1d /usr/lib64/ruby/gems/*/gems/passenger-*/`
 APACHE_ModPassenger_Ruby=`which ruby`
 
 # Git's git-http-backend & gitweb CGIs :
-GIT_PROJECT_ROOT=$HOME/git_repositories
+#GIT_PROJECT_ROOT=$HOME/git_repositories
 
 ########################################################################
 ## ApacheDefines bash array variable.
@@ -136,6 +137,6 @@ ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 #ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
 #ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
-#ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
+ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
 
 # vim: filetype=sh
