@@ -106,12 +106,16 @@ unset basedn
 PHPBIN=${PHPBIN:-`which php`}
 PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 
+# Git's git-http-backend
+GIT_PROJECT_ROOT=${GIT_PROJECT_ROOT:-$StandingBear/git_repositories}
+APACHE_Git_HttpBackend=`git --exec-path`/git-http-backend
+
 # Used in monitor_access_log.sh
 CCZEBIN=`which ccze`
 
 # Array of environment variable names that are to be imported into the
 # "empty env." (See $Env) :
-Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH )
+Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJECT_ROOT GIT_HTTP_EXPORT_ALL )
 
 # Source late local environment customizations, e.g. for a chance of customizing
 # $Environment without having to mess up here :

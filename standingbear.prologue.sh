@@ -82,6 +82,14 @@
 # If not set, base search DN is made up from the domain name we belong to :
 #APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/dc=example,dc=net?uid?sub?(objectClass=*)"}
 
+# Ruby on Rails :
+APACHE_ModPassengerSo=`ls -1 /usr/lib64/ruby/gems/*/gems/passenger-*/libout/apache2/mod_passenger.so`
+APACHE_ModPassenger_Root=`ls -1d /usr/lib64/ruby/gems/*/gems/passenger-*/`
+APACHE_ModPassenger_Ruby=`which ruby`
+
+# Git's git-http-backend & gitweb CGIs :
+GIT_PROJECT_ROOT=$HOME/git_repositories
+
 ########################################################################
 ## ApacheDefines bash array variable.
 #
@@ -101,6 +109,7 @@
 #  * STATUS        : conf/mods-available/status.conf
 #  * MANUAL        : conf/conf.d/apache_manual.conf
 #  * ERRORDOCS     : conf/conf.d/localized-error-pages
+#  * PASSENGER     : conf/mods-available/passenger.conf
 #  * PHP5          : conf/mods-available/php5.conf
 #  * PHP5_MANUAL
 #  * PROXY : conf/mods-available/proxy.conf
@@ -120,11 +129,13 @@ ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
+ApacheDefines=( "${ApacheDefines[@]}" PASSENGER )
 ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 #ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
 #ApacheDefines=( "${ApacheDefines[@]}" USERDIR )
 #ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
 #ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
+#ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
 
 # vim: filetype=sh
