@@ -30,6 +30,18 @@
 		Allow from all
 	</Directory>
 
+    # Ruby's powered stuff :
+    <IfDefine PASSENGER>
+        #RackBaseURI /app1
+        #RackBaseURI /app2
+        # Defaults to 'production' :
+        #RailsEnv development
+        RackBaseURI /rack
+        <Directory "${APACHE_ServerRoot}/www/default/htdocs/rack">
+            Options -MultiViews
+        </Directory>
+    </IfDefine>
+
 <IfDefine DAV>
 	Alias /dav "${APACHE_ServerRoot}/www/default/dav/"
 	<Directory "${APACHE_ServerRoot}/www/default/dav/">
