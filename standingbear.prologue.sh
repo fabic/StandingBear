@@ -87,6 +87,8 @@ APACHE_ModPassengerSo=`ls -1 /usr/lib64/ruby/gems/*/gems/passenger-*/libout/apac
 APACHE_ModPassenger_Root=`ls -1d /usr/lib64/ruby/gems/*/gems/passenger-*/`
 APACHE_ModPassenger_Ruby=`which ruby`
 
+# Git's git-http-backend & gitweb CGIs :
+GIT_PROJECT_ROOT=$HOME/git_repositories
 
 ########################################################################
 ## ApacheDefines bash array variable.
@@ -134,5 +136,6 @@ ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 #ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
 #ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
+#ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
 
 # vim: filetype=sh
