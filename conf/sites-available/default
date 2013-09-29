@@ -43,6 +43,7 @@
     </IfDefine>
 
 <IfDefine DAV>
+<IfDefine LDAP>
 	Alias /dav "${APACHE_ServerRoot}/www/default/dav/"
 	<Directory "${APACHE_ServerRoot}/www/default/dav/">
 		Options Indexes
@@ -60,6 +61,7 @@
 			Require user admin
 		</LimitExcept>
 	</Directory>
+</IfDefine>
 </IfDefine>
 
 
