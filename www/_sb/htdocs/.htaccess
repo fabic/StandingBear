@@ -21,13 +21,17 @@
 #
 # See local/Apaxy/apaxy/htaccess.txt
 #
+# F.2013-09-01 : Moved most of AI Apaxy config. in :
+#   conf/mods-available/autoindex.conf
+# Note that HeaderName & ReadmeName are left there c/o per default.
+#
 <IfDefine AI_APAXY>
-#
-# Apaxy by @adamwhitcroft
-#
-# For a full breakdown of the mod_autoindex module:
-# http://apache.org/docs/2.2/mod/mod_autoindex.html
-#
+    #
+    # Apaxy by @adamwhitcroft
+    #
+    # For a full breakdown of the mod_autoindex module:
+    # http://apache.org/docs/2.2/mod/mod_autoindex.html
+    #
 
 	# ENABLE INDEXING
 	Options +Indexes
@@ -35,66 +39,11 @@
 	# INDEX OPTIONS
 	IndexOptions +FancyIndexing +IgnoreCase +FoldersFirst +XHTML +HTMLTable +SuppressRules +SuppressDescription
 
-	# HIDE /theme DIRECTORY
-	IndexIgnore .htaccess cgi-bin /_apaxy
+    #
+    # THEME FILES
+    #
 
-#
-# GENERAL ICONS (BLANK, DIRECTORY, PARENT DIRECTORY)
-#
-
-#
-# Replace {FOLDERNAME} with your directory URL eg:
-# If your directory is http://mywebsite.com/share/
-# you would change to:
-#
-# AddIcon /share/theme/icons/blank.png ^^BLANKICON^^
-#
-
-	AddIcon /_apaxy/theme/icons/blank.png ^^BLANKICON^^
-	AddIcon /_apaxy/theme/icons/folder.png ^^DIRECTORY^^
-	AddIcon /_apaxy/theme/icons/folder-home.png ..
-
-#
-# EXTENSION SPECIFIC ICONS
-#
-	
-	AddIcon /_apaxy/theme/icons/audio.png .aif .iff .m3u .m4a .mid .mp3 .mpa .ra .wav .wma
-	AddIcon /_apaxy/theme/icons/bin.png .bin
-	AddIcon /_apaxy/theme/icons/c.png .c
-	AddIcon /_apaxy/theme/icons/calc.png .xlsx .xlsm .xltx .xltm .xlam .xlr .xls .csv 
-	AddIcon /_apaxy/theme/icons/css.png .css
-	AddIcon /_apaxy/theme/icons/doc.png .doc .docx .docm .dot .dotx .dotm .log .msg .odt .pages .rtf .tex .wpd .wps
-	AddIcon /_apaxy/theme/icons/draw.png .svg
-	AddIcon /_apaxy/theme/icons/eps.png .ai .eps
-	AddIcon /_apaxy/theme/icons/gif.png .gif
-	AddIcon /_apaxy/theme/icons/html.png .html .xhtml .shtml .htm
-	AddIcon /_apaxy/theme/icons/ico.png .ico
-	AddIcon /_apaxy/theme/icons/java.png .jar
-	AddIcon /_apaxy/theme/icons/jpg.png .jpg .jpeg
-	AddIcon /_apaxy/theme/icons/js.png .js .json
-	AddIcon /_apaxy/theme/icons/markdown.png .md
-	AddIcon /_apaxy/theme/icons/package.png .pkg .dmg 
-	AddIcon /_apaxy/theme/icons/pdf.png .pdf
-	AddIcon /_apaxy/theme/icons/php.png .php
-	AddIcon /_apaxy/theme/icons/png.png .png
-	AddIcon /_apaxy/theme/icons/ps.png .ps
-	AddIcon /_apaxy/theme/icons/psd.png .psd
-	AddIcon /_apaxy/theme/icons/rar.png .rar
-	AddIcon /_apaxy/theme/icons/rb.png .rb
-	AddIcon /_apaxy/theme/icons/rss.png .rss
-	AddIcon /_apaxy/theme/icons/sql.png .sql
-	AddIcon /_apaxy/theme/icons/tiff.png .tiff
-	AddIcon /_apaxy/theme/icons/text.png .txt
-	AddIcon /_apaxy/theme/icons/video.png .asf .asx .avi .flv .mkv .mov .mp4 .mpg .rm .srt .swf .vob .wmv
-	AddIcon /_apaxy/theme/icons/xml.png .xml
-	AddIcon /_apaxy/theme/icons/zip.png .zip
-	DefaultIcon /_apaxy/theme/icons/default.png
-
-#
-# THEME FILES
-#
-
+	#IndexStyleSheet "/_apaxy/theme/style.css"
 	HeaderName /_apaxy/theme/header.html
 	ReadmeName /_apaxy/theme/footer.html
-	IndexStyleSheet "/_apaxy/theme/style.css"
 </IfDefine>
