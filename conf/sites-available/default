@@ -1,3 +1,5 @@
+# File: conf/sites-available/default
+
 <IfDefine DEFAULT_VHOST>
 <VirtualHost *:${APACHE_ListenPort}>
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
@@ -19,7 +21,9 @@
 		AllowOverride All
 		#AllowOverride FileInfo
 		Order allow,deny
-		allow from all
+		Allow from all
+
+        Include conf/vhost_authnz.include.conf
 	</Directory>
 
 	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/default/cgi-bin/"
@@ -43,7 +47,6 @@
     </IfDefine>
 
 <IfDefine DAV>
-<IfDefine LDAP>
 	Alias /dav "${APACHE_ServerRoot}/www/default/dav/"
 	<Directory "${APACHE_ServerRoot}/www/default/dav/">
 		Options Indexes
@@ -52,16 +55,12 @@
 
 		Dav On
 
-		AuthType Basic
-		AuthName "DAV"
-		AuthBasicProvider ldap1
-		Require valid-user
+        Include conf/vhost_authnz.include.conf
 
 		<LimitExcept GET OPTIONS>
 			Require user admin
 		</LimitExcept>
 	</Directory>
-</IfDefine>
 </IfDefine>
 
 
