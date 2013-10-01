@@ -65,6 +65,7 @@
 
 
 
+    # TODO: Move to a conf/vhost_maintenance_mode.include.conf
     #
     # Maintenance mode : Enabled if file maintenance-mode-on exists.
     #
@@ -77,6 +78,10 @@
     RewriteCond %{REQUEST_URI} !>${_SB}
     RewriteRule !^/maintenance-in-progress/.*$ /maintenance-in-progress/ [R=307,L]
     </IfModule>
+
+    ## Left c/o as we're using the server-wide configuration at :
+    ##    > conf/mods-enabled/log_config.conf (CustomLog ...)
+    ##    > conf/httpd.conf (ErrorLog ...)
 
 	#ErrorLog var/log/error.log
 

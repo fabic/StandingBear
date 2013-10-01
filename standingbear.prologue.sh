@@ -113,10 +113,12 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * PASSENGER     : conf/mods-available/passenger.conf
 #  * PHP5          : conf/mods-available/php5.conf
 #  * PHP5_MANUAL
+#  * AUTH_BASIC    : conf//mods-available/auth_basic.conf
 #  * PROXY : conf/mods-available/proxy.conf
 #  *    PROXY_FTP, PROXY_HTTP, PROXY_CONNECT,
 #  *    PROXY_AJP, PROXY_SCGI,
 #  *    PROXY_BALANCER
+#  * PROXY_AUTH : Whether or not to enable forward-proxying for *All* (with authentication).
 #  * LDAP : conf/mods-available/ldap.conf (mod_ldap & mod_authnz_ldap)
 #  * DAV  : conf/mods-available/dav.conf
 #  * GIT_HTTP_BACKEND : conf/mods-available/git-http-backend.conf
