@@ -129,14 +129,14 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
 #  * MARKDOWN
 #
-ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST )
+ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
 ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
-ApacheDefines=( "${ApacheDefines[@]}" PASSENGER )
+#ApacheDefines=( "${ApacheDefines[@]}" PASSENGER )
 ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
-#ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
+#ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP PROXY_AUTH )
 #ApacheDefines=( "${ApacheDefines[@]}" USERDIR )
 #ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
