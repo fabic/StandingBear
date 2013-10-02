@@ -44,6 +44,6 @@
     #
 
 	#IndexStyleSheet "/_apaxy/theme/style.css"
-	HeaderName /_apaxy/theme/header.html
-	ReadmeName /_apaxy/theme/footer.html
+	HeaderName header.html
+	ReadmeName footer.html
 </IfDefine>
