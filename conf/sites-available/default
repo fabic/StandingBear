@@ -63,6 +63,8 @@
 	</Directory>
 </IfDefine>
 
+    ## !!BEWARE!! FORWARD PROXY !
+    Include conf/vhost_forward_proxy.include.conf
 
     ## MAINTENANCE MODE :
     Include conf/vhost_maintenance_mode.include.conf
