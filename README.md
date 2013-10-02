@@ -5,6 +5,10 @@ Essentially based on Debian 6.0.6 Apache2 configuration layout (from
 
 Apache is run in a wiped out environment.
 
+## ChangeLog
+
+* 2013-10-02 (Brussels) : Configuration review after a while...
+
 ## Installation
 
     git clone git://github.com/Oeil-de-nuit/StandingBear.git
@@ -175,7 +179,8 @@ Apigen.php, Apaxy, h5ai
 * [ ] Redmine ?
 * [ ] Twitter's Bootstrap-ed ?
 * [ ] Blueprint-CSS ?
-+* [ ] WebDAV enabled app (php?) for simple drag'n'drop.
+* [ ] WebDAV enabled app (php?) for simple drag'n'drop.
+* [ ] proxy.pac file ?
 
 ### Apache modules
 
