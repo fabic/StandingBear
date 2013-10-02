@@ -20,10 +20,11 @@
     #
     ScriptAlias ${_SB}/cgi-bin/ "${APACHE_ServerRoot}/www/_sb/cgi-bin/"
     <Directory "${APACHE_ServerRoot}/www/_sb/cgi-bin/">
-    AllowOverride None
-    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-    Order allow,deny
-    Allow from all
+        AllowOverride None
+        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        Order deny,allow
+        Deny from all
+        Allow from env=let_me_in
     </Directory>
 
     Alias ${_SB} "${APACHE_ServerRoot}/www/_sb/htdocs/"
