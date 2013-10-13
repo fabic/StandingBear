@@ -100,6 +100,7 @@ APACHE_ModPassenger_Ruby=`which ruby`
 
 # Git's git-http-backend & gitweb CGIs :
 #GIT_PROJECT_ROOT=$HOME/git_repositories
+#GIT_PROJECT_ROOT=$HOME/dev
 
 ########################################################################
 ## ApacheDefines bash array variable.
