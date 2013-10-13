@@ -1,3 +1,5 @@
+# File: conf/sites-available/default
+
 <IfDefine DEFAULT_VHOST>
 <VirtualHost *:${APACHE_ListenPort}>
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
@@ -19,7 +21,9 @@
 		AllowOverride All
 		#AllowOverride FileInfo
 		Order allow,deny
-		allow from all
+		Allow from all
+
+        Include conf/vhost_authnz.include.conf
 	</Directory>
 
 	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/default/cgi-bin/"
@@ -51,10 +55,7 @@
 
 		Dav On
 
-		AuthType Basic
-		AuthName "DAV"
-		AuthBasicProvider ldap1
-		Require valid-user
+        Include conf/vhost_authnz.include.conf
 
 		<LimitExcept GET OPTIONS>
 			Require user admin
@@ -62,20 +63,15 @@
 	</Directory>
 </IfDefine>
 
+    ## !!BEWARE!! FORWARD PROXY !
+    Include conf/vhost_forward_proxy.include.conf
 
+    ## MAINTENANCE MODE :
+    Include conf/vhost_maintenance_mode.include.conf
 
-    #
-    # Maintenance mode : Enabled if file maintenance-mode-on exists.
-    #
-    # See http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection
-    #
-    <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{DOCUMENT_ROOT}/maintenance-mode-on -f
-    RewriteCond %{ENV:let_me_in} =""
-    RewriteCond %{REQUEST_URI} !>${_SB}
-    RewriteRule !^/maintenance-in-progress/.*$ /maintenance-in-progress/ [R=307,L]
-    </IfModule>
+    ## Left c/o as we're using the server-wide configuration at :
+    ##    > conf/mods-enabled/log_config.conf (CustomLog ...)
+    ##    > conf/httpd.conf (ErrorLog ...)
 
 	#ErrorLog var/log/error.log
 

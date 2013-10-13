@@ -13,4 +13,5 @@ filter_vhost_combined () {
     return
 }
 
-exec tail -f "$StandingBear/var/log/"{error_log,access_log,php.log} | $CCZEBIN -A
+#exec tail -f "$StandingBear/var/log/"{error_log,access_log,php.log} | ( `which ccze >2 /dev/null` && ccze -A || cat )
+exec tail -f "$StandingBear/var/log/"*log | ( [ "x`which ccze 2> /dev/null`" != "x" ] && ccze -A || cat )

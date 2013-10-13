@@ -1,2 +1,12 @@
 #!/bin/sh
-`dirname "$0"`/apachectl -k restart "${@}"
+
+#`dirname "$0"`/apachectl -k restart "${@}"
+
+echo "STOPPING..."
+`dirname "$0"`/stop_www "${@}"
+
+echo "SLEEP..."
+sleep 2
+
+echo "STARTING..."
+`dirname "$0"`/start_www "${@}"

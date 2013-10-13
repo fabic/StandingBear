@@ -128,10 +128,12 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * FASTCGI       : conf/mods-available/fastcgi.conf
 #  * FCGID         : conf/mods-available/fcgid.conf
 #  * SCGID         : conf/mods-available/scgid.conf
+#  * AUTH_BASIC    : conf//mods-available/auth_basic.conf
 #  * PROXY : conf/mods-available/proxy.conf
 #  *    PROXY_FTP, PROXY_HTTP, PROXY_CONNECT,
 #  *    PROXY_AJP, PROXY_SCGI,
 #  *    PROXY_BALANCER
+#  * PROXY_AUTH : Whether or not to enable forward-proxying for *All* (with authentication).
 #  * LDAP : conf/mods-available/ldap.conf (mod_ldap & mod_authnz_ldap)
 #  * DAV  : conf/mods-available/dav.conf
 #  * GIT_HTTP_BACKEND : conf/mods-available/git-http-backend.conf
@@ -142,14 +144,14 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
 #  * MARKDOWN
 #
-ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST )
+ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
 ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 ApacheDefines=( "${ApacheDefines[@]}" PHP5 PHP5_MANUAL )
-ApacheDefines=( "${ApacheDefines[@]}" PASSENGER )
+#ApacheDefines=( "${ApacheDefines[@]}" PASSENGER )
 ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
-#ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP )
+#ApacheDefines=( "${ApacheDefines[@]}" PROXY PROXY_FTP PROXY_HTTP PROXY_CONNECT PROXY_AJP PROXY_AUTH )
 #ApacheDefines=( "${ApacheDefines[@]}" USERDIR )
 #ApacheDefines=( "${ApacheDefines[@]}" LDAP )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV )
