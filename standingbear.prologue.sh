@@ -113,6 +113,10 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * PASSENGER     : conf/mods-available/passenger.conf
 #  * PHP5          : conf/mods-available/php5.conf
 #  * PHP5_MANUAL
+#  * SUPHP         : conf/mods-available/suphp.conf
+#  * FASTCGI       : conf/mods-available/fastcgi.conf
+#  * FCGID         : conf/mods-available/fcgid.conf
+#  * SCGID         : conf/mods-available/scgid.conf
 #  * PROXY : conf/mods-available/proxy.conf
 #  *    PROXY_FTP, PROXY_HTTP, PROXY_CONNECT,
 #  *    PROXY_AJP, PROXY_SCGI,
