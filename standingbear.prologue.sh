@@ -129,6 +129,7 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * FCGID         : conf/mods-available/fcgid.conf
 #  * SCGID         : conf/mods-available/scgid.conf
 #  * AUTH_BASIC    : conf//mods-available/auth_basic.conf
+#  * AUTH_DIGEST   : conf//mods-available/auth_digest.conf
 #  * PROXY : conf/mods-available/proxy.conf
 #  *    PROXY_FTP, PROXY_HTTP, PROXY_CONNECT,
 #  *    PROXY_AJP, PROXY_SCGI,
