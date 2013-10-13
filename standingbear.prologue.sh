@@ -33,7 +33,7 @@
 # notably PATH would be prepended with /opt/httpd-2.2.23/bin.
 #prefixed_paths "$StandingBear/local/apache"
 #prefixed_paths "$StandingBear/local/php"
-#prefixed_paths "/opt/php-5.3.13"
+#prefixed_paths "/opt/php-5.3.27"
 
 # Defaults to $SSH_CLIENT if defined! Else 127.0.0.1
 #
@@ -74,11 +74,21 @@
 #APACHE_ModPhp5SO=/usr/lib/php5.3/apache2/libphp5.so
 #APACHE_ModPhp5SO=/usr/lib/php5.4/apache2/libphp5.so
 
+#
 # E.g. hand-built PHP in /opt :
-#APACHE_ModPhp5SO=/opt/php-5.3.23/lib/libphp5.so
+#APACHE_ModPhp5SO=/opt/php-5.3.27/lib/libphp5.so
+#
+#SlashOptPhp=/opt/php-5.3.27
 
-# PHP binary path :
-#PHPBIN=/opt/php-5.3.23/bin/php
+#prefixed_paths $SlashOptPhp
+
+#APACHE_ModPhp5SO=$SlashOptPhp/lib/libphp5.so
+
+# PHP binary path (fixme: get rid of this?):
+#PHPBIN=/opt/php-5.3.27/bin/php
+#PHPBIN=$SlashOptPhp/bin/php
+# Or, thanks to the prefixed_paths line above :
+PHPBIN=`which php`
 
 # If not set, base search DN is made up from the domain name we belong to :
 #APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/dc=example,dc=net?uid?sub?(objectClass=*)"}
