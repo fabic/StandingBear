@@ -116,8 +116,13 @@ APACHE_Gitweb=$(dirname `locate gitweb.cgi`)
 CCZEBIN=`which ccze`
 
 # Array of environment variable names that are to be imported into the
-# "empty env." (See $Env) :
-Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJECT_ROOT GIT_HTTP_EXPORT_ALL GITWEB_CONFIG )
+# "empty env." (See 'env -i' invocation further below) :
+
+# $Environment may have been already set from standingbear.prologue.sh, ...
+declare -a Environment
+
+# ... and we're about to prepend stuff to it :
+Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJECT_ROOT GIT_HTTP_EXPORT_ALL GITWEB_CONFIG "${Environment[@]}" )
 
 # Source late local environment customizations, e.g. for a chance of customizing
 # $Environment without having to mess up here :
