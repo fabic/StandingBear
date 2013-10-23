@@ -2,7 +2,7 @@
 #
 # todo: Have a php/php-cli.ini ?
 #
-source $(dirname `realpath "$0"`)/../standingbear.sh
+source $(dirname "$0")/../standingbear.sh
 
 exec \
     $Env \

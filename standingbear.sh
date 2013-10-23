@@ -21,7 +21,7 @@
 
 # For scripts to have their location at hands-reach, realpath
 # so that scripts can be symlinked :
-HERE=$( cd `dirname $(realpath "$0")` && pwd )
+HERE=$( cd `dirname "$0"` && pwd )
 
 # Prevent from being included several times :
 [ "x$StandingBear" != "x" ] && return
