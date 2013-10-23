@@ -1,12 +1,29 @@
-<IfModule mod_ssl.c>
+<IfDefine SSL>
+<IfDefine SSL_DEFAULT_VHOST>
+<IfModule ssl_module>
+# Gentoo: see bug #178966 why this is in here
+
+# When we also provide SSL we have to listen to the HTTPS port
+# Note: Configurations that use IPv6 but not IPv4-mapped addresses need two
+# Listen directives: "Listen [::]:443" and "Listen 0.0.0.0:443"
+Listen ${APACHE_ListenPortSSL}
+
+## Note/Fcj.: Simple "everything https://" redirection.
+#<VirtualHost *:${APACHE_ListenPort}>
+#	ServerAdmin ${APACHE_RUN_USER}@{$APACHE_Hostname}
+#	ServerName ${APACHE_Hostname}
+#	Redirect / https://${APACHE_Hostname}:${APACHE_ListenPortSSL}/
+#</VirtualHost>
+
 <VirtualHost _default_:443>
-	ServerAdmin webmaster@localhost
+	ServerAdmin ${APACHE_RUN_USER}@{$APACHE_Hostname}
 
 	DocumentRoot /var/www
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
+
 	<Directory /var/www/>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride None
@@ -34,13 +51,19 @@
 	#   Enable/Disable SSL for this virtual host.
 	SSLEngine on
 
+	## Note/Fcj.: Original Debian conf. left c/o below, putting the 3 actual
+	# common/required lines for it to work :
+	SSLCertificateFile      ssl/cert--my-host-example-net.pem
+	SSLCertificateKeyFile   ssl/privkey--my-host-example-net.key
+	SSLCertificateChainFile ssl/chain--my-host-example-net.pem
+
 	#   A self-signed (snakeoil) certificate can be created by installing
 	#   the ssl-cert package. See
 	#   /usr/share/doc/apache2.2-common/README.Debian.gz for more info.
 	#   If both key and certificate are stored in the same file, only the
 	#   SSLCertificateFile directive is needed.
-	SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
-	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	#SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+	#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 
 	#   Server Certificate Chain:
 	#   Point SSLCertificateChainFile at a file containing the
@@ -79,12 +102,11 @@
 	#SSLVerifyClient require
 	#SSLVerifyDepth  10
 
-	#   Access Control:
-	#   With SSLRequire you can do per-directory access control based
-	#   on arbitrary complex boolean expressions containing server
-	#   variable checks and other lookup directives.  The syntax is a
-	#   mixture between C and Perl.  See the mod_ssl documentation
-	#   for more details.
+	## Access Control:
+	# With SSLRequire you can do per-directory access control based on arbitrary
+	# complex boolean expressions containing server variable checks and other
+	# lookup directives. The syntax is a mixture between C and Perl. See the
+	# mod_ssl documentation for more details.
 	#<Location />
 	#SSLRequire (    %{SSL_CIPHER} !~ m/^(EXP|NULL)/ \
 	#            and %{SSL_CLIENT_S_DN_O} eq "Snake Oil, Ltd." \
@@ -153,11 +175,37 @@
 	#   Similarly, one has to force some clients to use HTTP/1.0 to workaround
 	#   their broken HTTP/1.1 implementation. Use variables "downgrade-1.0" and
 	#   "force-response-1.0" for this.
-	BrowserMatch "MSIE [2-6]" \
-		nokeepalive ssl-unclean-shutdown \
-		downgrade-1.0 force-response-1.0
-	# MSIE 7 and newer should be able to use keepalive
-	BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
+	<IfModule setenvif_module>
+		## >> Gentoo <<
+		#BrowserMatch ".*MSIE.*" \
+		#	nokeepalive ssl-unclean-shutdown \
+		#	downgrade-1.0 force-response-1.0
+		## >> Debian <<
+		BrowserMatch "MSIE [2-6]" \
+			nokeepalive ssl-unclean-shutdown \
+			downgrade-1.0 force-response-1.0
+		# MSIE 7 and newer should be able to use keepalive
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	</IfModule>
+
+	## SSL Cipher Suite:
+	# List the ciphers that the client is permitted to negotiate.
+	# See the mod_ssl documentation for a complete list.
+	#
+	# Fcj.: See also conf/mods-enabled/ssl.conf
+	SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+
+	## Per-Server Logging:
+	# The home of a custom SSL log file. Use this when you want a compact 
+	# non-error SSL logfile on a virtual host basis.
+	<IfModule log_config_module>
+		TransferLog /var/log/apache2/ssl_access_log
+		CustomLog /var/log/apache2/ssl_request_log \
+			"%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+	</IfModule>
 </VirtualHost>
 </IfModule>
+</IfDefine>
+</IfDefine>
+# vim: ts=4 filetype=apache

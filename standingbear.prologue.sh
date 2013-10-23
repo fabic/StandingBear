@@ -116,6 +116,8 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * REWRITE       : conf/mods-available/rewrite.conf
 #  * AUTOINDEX     : conf/mods-available/autoindex.conf
 #  * DEFAULT_VHOST : conf/sites-available/default
+#  * SSL_DEFAULT_VHOST : conf/sites-available/default-ssl
+#  * SSL           : conf/mods-available/ssl.conf
 #  * USERDIR       : conf/mods-available/userdir.conf
 #  * INFO          : conf/mods-available/info.conf
 #  * STATUS        : conf/mods-available/status.conf
@@ -146,6 +148,8 @@ APACHE_ModPassenger_Ruby=`which ruby`
 #  * MARKDOWN
 #
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
+ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST )
+#ApacheDefines=( "${ApacheDefines[@]}" SSL SSL_DEFAULT_VHOST )
 ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
 ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
