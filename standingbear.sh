@@ -110,7 +110,7 @@ PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 GIT_PROJECT_ROOT=${GIT_PROJECT_ROOT:-$StandingBear/git_repositories}
 GITWEB_CONFIG=${GITWEB_CONFIG:-$StandingBear/gitweb.conf}
 APACHE_Git_HttpBackend=`git --exec-path`/git-http-backend
-APACHE_Gitweb=$(dirname `locate gitweb.cgi`)
+APACHE_Gitweb=$(dirname `locate gitweb.cgi | tail -n1`)
 
 # Used in monitor_access_log.sh
 CCZEBIN=`which ccze`
