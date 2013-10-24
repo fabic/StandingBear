@@ -23,6 +23,13 @@
 #APACHE_RUN_USER=www-data
 #APACHE_RUN_GROUP=www-data
 
+# Apache will refuse to be run as root :
+if [ `id -u` == 0 ]; then
+	echo "INFO: WE'RE BEING INVOKED AS ROOT."
+	[ -z $APACHE_RUN_USER ] && echo "APACHE_RUN_USER is not set! Exiting..." && exit 1
+	[ -z $APACHE_RUN_GROUP ] && echo "APACHE_RUN_GROUP is not set! Exiting..." && exit 2
+fi
+
 # Typically used in vhost definition files,
 # see conf/sites-available/ & conf/ports.conf 
 #APACHE_Hostname=example.org
