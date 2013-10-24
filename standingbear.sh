@@ -112,6 +112,11 @@ GITWEB_CONFIG=${GITWEB_CONFIG:-$StandingBear/gitweb.conf}
 APACHE_Git_HttpBackend=`git --exec-path`/git-http-backend
 APACHE_Gitweb=$(dirname `locate gitweb.cgi | tail -n1`)
 
+# Ruby on Rails & Apache « passenger » module :
+APACHE_ModPassengerSo=`locate libout/apache2/mod_passenger.so | tail -n1`
+APACHE_ModPassenger_Root=${APACHE_ModPassengerSo%libout/apache2/mod_passenger.so}
+APACHE_ModPassenger_Ruby=`which ruby`
+
 # Used in monitor_access_log.sh
 CCZEBIN=`which ccze`
 

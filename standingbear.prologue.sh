@@ -93,10 +93,10 @@ PHPBIN=`which php`
 # If not set, base search DN is made up from the domain name we belong to :
 #APACHE_LdapAuthURL=${APACHE_LdapAuthURL:-"ldap://127.0.0.1:389/dc=example,dc=net?uid?sub?(objectClass=*)"}
 
-# Ruby on Rails :
-APACHE_ModPassengerSo=`ls -1 /usr/lib64/ruby/gems/*/gems/passenger-*/libout/apache2/mod_passenger.so`
-APACHE_ModPassenger_Root=`ls -1d /usr/lib64/ruby/gems/*/gems/passenger-*/`
-APACHE_ModPassenger_Ruby=`which ruby`
+# Ruby on Rails & Apache "passenger" module :
+#APACHE_ModPassengerSo=`ls -1 /usr/lib64/ruby/gems/*/gems/passenger-*/libout/apache2/mod_passenger.so | tail -n1`
+#APACHE_ModPassenger_Root=`ls -1d /usr/lib64/ruby/gems/*/gems/passenger-*/ | tail -n1`
+#APACHE_ModPassenger_Ruby=`which ruby`
 
 # Git's git-http-backend & gitweb CGIs :
 #GIT_PROJECT_ROOT=$HOME/git_repositories
