@@ -109,6 +109,14 @@ PHPBIN=`which php`
 #GIT_PROJECT_ROOT=$HOME/git_repositories
 #GIT_PROJECT_ROOT=$HOME/dev
 
+# SVN repositories root, served under /svn, defaults to svn_repositories/ ;
+# @see conf/mods-available/dav_svn.conf
+# Ex.:
+#    $ svnadmin create svn_repositories/testrepo
+#    $ svn info http://localhost:8000/svn/testrepo
+#
+#SVN_PROJECTS_ROOT=$HOME/dev/svn_repositories
+
 ########################################################################
 ## ApacheDefines bash array variable.
 #
@@ -148,6 +156,8 @@ PHPBIN=`which php`
 #  * DAV  : conf/mods-available/dav.conf
 #  * GIT_HTTP_BACKEND : conf/mods-available/git-http-backend.conf
 #  * GITWEB : conf/mods-available/gitweb.conf
+#  * SVN        : conf/mods-available/dav_svn.conf
+#  * SVN_AUTHZ  : conf/mods-available/dav_svn.conf
 #
 # Third-party stuff :
 #  * STANDINGBEAR : Enable StandingBear stuff under $_SB (e.g. /_sb/)
@@ -170,6 +180,7 @@ ApacheDefines=( "${ApacheDefines[@]}" AI_APAXY )
 #ApacheDefines=( "${ApacheDefines[@]}" MARKDOWN )
 ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
 ApacheDefines=( "${ApacheDefines[@]}" GITWEB )
+ApacheDefines=( "${ApacheDefines[@]}" DAV SVN )
 
 #######################################################################
 ### Custom "to-be-passed" environment may be done from within here, ###

@@ -112,6 +112,11 @@ GITWEB_CONFIG=${GITWEB_CONFIG:-$StandingBear/gitweb.conf}
 APACHE_Git_HttpBackend=`git --exec-path`/git-http-backend
 APACHE_Gitweb=$(dirname `locate gitweb.cgi | tail -n1`)
 
+# Subversion (SVN) root dir. of repositories (for SVNParentPath directive) :
+# @link http://svnbook.red-bean.com/en/1.7/svn.serverconfig.httpd.html
+# @see conf/mods-available/dav_svn.conf
+SVN_PROJECTS_ROOT=${SVN_PROJECTS_ROOT:-$StandingBear/svn_repositories}
+
 # Ruby on Rails & Apache « passenger » module :
 APACHE_ModPassengerSo=`locate libout/apache2/mod_passenger.so | tail -n1`
 APACHE_ModPassenger_Root=${APACHE_ModPassengerSo%libout/apache2/mod_passenger.so}
@@ -127,7 +132,7 @@ CCZEBIN=`which ccze`
 declare -a Environment
 
 # ... and we're about to prepend stuff to it :
-Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJECT_ROOT GIT_HTTP_EXPORT_ALL GITWEB_CONFIG "${Environment[@]}" )
+Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJECT_ROOT GIT_HTTP_EXPORT_ALL GITWEB_CONFIG SVN_PROJECTS_ROOT "${Environment[@]}" )
 
 # Source late local environment customizations, e.g. for a chance of customizing
 # $Environment without having to mess up here :
