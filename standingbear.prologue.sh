@@ -22,6 +22,8 @@
 # Default to the current user (`id -un` & `id -gn`) :
 #APACHE_RUN_USER=www-data
 #APACHE_RUN_GROUP=www-data
+#APACHE_RUN_USER=fabi
+#APACHE_RUN_GROUP=apache
 
 # Apache will refuse to be run as root :
 if [ `id -u` == 0 ]; then
@@ -31,16 +33,15 @@ if [ `id -u` == 0 ]; then
 fi
 
 # Typically used in vhost definition files,
-# see conf/sites-available/ & conf/ports.conf 
+# see conf/sites-available/ & conf/ports.conf
 #APACHE_Hostname=example.org
-#APACHE_ListenPort=8000
-#APACHE_ListenPortSSL=8001
+#APACHE_ListenPort=80
+#APACHE_ListenPortSSL=443
 
 # For hand-compiled stuff, e.g. with ./configure --prefix=/opt/httpd-2.2.23/ ...
 # notably PATH would be prepended with /opt/httpd-2.2.23/bin.
 #prefixed_paths "$StandingBear/local/apache"
 #prefixed_paths "$StandingBear/local/php"
-#prefixed_paths "/opt/php-5.3.27"
 
 # Defaults to $SSH_CLIENT if defined! Else 127.0.0.1
 #
@@ -80,6 +81,7 @@ fi
 # E.g. on Gentoo :
 #APACHE_ModPhp5SO=/usr/lib/php5.3/apache2/libphp5.so
 #APACHE_ModPhp5SO=/usr/lib/php5.4/apache2/libphp5.so
+#APACHE_ModPhp5SO=/usr/lib/php5.5/apache2/libphp5.so
 
 #
 # E.g. hand-built PHP in /opt :
@@ -165,7 +167,6 @@ PHPBIN=`which php`
 #  * MARKDOWN
 #
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
-ApacheDefines=( LANGUAGE REWRITE AUTOINDEX DEFAULT_VHOST )
 #ApacheDefines=( "${ApacheDefines[@]}" SSL SSL_DEFAULT_VHOST )
 ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
 ApacheDefines=( "${ApacheDefines[@]}" INFO STATUS )
@@ -195,6 +196,8 @@ ApacheDefines=( "${ApacheDefines[@]}" DAV SVN )
 # From time to time I have to set it for dl to resolve Sybase libsyb*64.so, e.g. :
 #    « Cannot load /opt/php-5.3.23/lib/libphp5.so into server:
 #        libsybunic64.so: cannot open shared object file: No such file or directory »
+# Specifically this may be needed when Apache is invoked as root (an alternative
+# would be to add this to /etc/ld.so.conf ).
 #pathprepend "$SYBASE/$SYBASE_OCS/lib" LD_LIBRARY_PATH
 
 #Environment=( "${Environment[@]}" SYBASE SYBASE_OCS DSQUERY )
