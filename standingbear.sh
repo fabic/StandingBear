@@ -104,7 +104,8 @@ unset basedn
 # fixme: temp.?
 # todo: s/PHPBIN/PHP_Bin/ ?
 PHPBIN=${PHPBIN:-`which php`}
-PHPINI=${PHPINI:-$StandingBear/php/php.ini}
+PHPINI=${PHPINI:-}
+#PHPINI=${PHPINI:-$StandingBear/php/php.ini}
 
 # Git's git-http-backend
 GIT_PROJECT_ROOT=${GIT_PROJECT_ROOT:-$StandingBear/git_repositories}
