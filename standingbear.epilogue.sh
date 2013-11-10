@@ -10,18 +10,11 @@
 # so that customization be mainly kept in one place.
 #
 
-# Sample custom env. var., defined in standingbear.prologue.sh :
-#Environment=( "${Environment[@]}" GIT_PROJECTS_ROOT )
+## Sample custom env. var. defined here :
+#My_Late_Custom_Var=`php --version|head -n1|tr ' ' _ `
+## That env. var. may eventually be passed to Apache by adding it to the Environment
+## bash array :
+#Environment=( "${Environment[@]}" My_Late_Custom_Var )
 
-## Sybase ASE 15.x :
-#SYBASE=${SYBASE:-/opt/sybase}
-#SYBASE_OCS=${SYBASE_OCS:-OCS-15_0}
-#DSQUERY=${DSQUERY:-}
 
-# From time to time I have to set it for dl to resolve Sybase libsyb*64.so, e.g. :
-#    « Cannot load /opt/php-5.3.23/lib/libphp5.so into server:
-#        libsybunic64.so: cannot open shared object file: No such file or directory »
-#pathprepend "$SYBASE/$SYBASE_OCS/lib" LD_LIBRARY_PATH
-
-#Environment=( "${Environment[@]}" SYBASE SYBASE_OCS DSQUERY )
 

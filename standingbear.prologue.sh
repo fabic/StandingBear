@@ -1,47 +1,93 @@
 #
 # standingbear.prologue.sh
 #
-# This file is sourced *early* by standingbear.sh, unasigned environment
-# variables then get their defaults.
+# This is the main configuration file. Setup consists of altering environment
+# variables here that would otherwise get their default values.
 #
-# Custom environment variables may be defined here, see also
-# standingbear.epilogue.sh for a chance to pass them to the
-# wiped out environment Apache gets run with.
+# It is sourced *early* by standingbear.sh, unasigned environment variables
+# then get their defaults.
+#
+# Custom environment variables may be defined here with the intent (or not) of
+# having these passed to Apache.
+#
+# Optionally a second configuration file, standingbear.epilogue.sh, may be used
+# for altering environment variables *after* these have got their defaults from
+# standingbear.sh
 #
 # Already defined when this file get sourced are :
 #   * $StandingBear : Absolute path to standingbear.sh stands.
 #   * $HERE : Absolute path of the executing script that sourced standingbear.sh
-#   * *PATH toolkit : pathappend(), pathprepend(), pathremove(), prefixed_paths()
+#   * $PATH toolkit : pathappend(), pathprepend(), pathremove(), prefixed_paths()
 #
+# Of special interest here for getting things running are :
+#   * The bash array $Environment : A list of environment variable names that shall
+#     be passed to Apache ;
+#   * The Apache_* environment variables : These get passed automatically to Apache,
+#     by being added to $Environment ;
+#   * The bash array $ApacheDefines : A list of Apache defines (ex. -D MyDefine),
+#     for <IfDefine MyDefine>...</IfDefine> construct.
 
-# Sample custom env. var. defined here, but actually added to
-# the $Environment bash array in standingbear.epilogue.sh :
-# TODO: find another name for that sample env...
-#GIT_PROJECTS_ROOT="$StandingBear/git_repositories"
+## At the bare minimum, and first step, is to A) specify (where is) the Apache
+## binary with APACHE_Httpd :
+#APACHE_Httpd=httpd
+#APACHE_Httpd=apache2
+#APACHE_Httpd=`which apache2`
+#APACHE_Httpd=`which httpd`
+#APACHE_Httpd=/usr/sbin/apache2
+#APACHE_Httpd=/opt/apache2/bin/httpd
 
-# Default to the current user (`id -un` & `id -gn`) :
+## Additionnally there some guessing magic in standingbear.sh that use APACHE_Home
+## for guessing it all (id defaults to /usr):
+#APACHE_Home=/opt/httpd
+#APACHE_Home=/opt/httpd-2.2.23
+#APACHE_Home=${APACHE_Home:=$APACHE_ServerRoot/local/httpd}
+
+## And B) whence are the Apache modules :
+#APACHE_Modules=/usr/lib/apache2/modules
+
+## C) A few more but less important ones are :
+#APACHE_Manual=/usr/share/doc/apache-2.2.23/manual
+#APACHE_ErrorDocuments=/usr/share/apache2/error
+#APACHE_Icons=/usr/share/apache2/icons
+
+
+## Apache personality (User, Group) ; default to the current user (`id -un` & `id -gn`),
+## but would better being set explicitly, specifically if intent is to be launched
+## as root (ex. for using ports under 1024) :
 #APACHE_RUN_USER=www-data
 #APACHE_RUN_GROUP=www-data
 #APACHE_RUN_USER=fabi
 #APACHE_RUN_GROUP=apache
 
-# Apache will refuse to be run as root :
+## Apache will refuse to be run as root :
 if [ `id -u` == 0 ]; then
 	echo "INFO: WE'RE BEING INVOKED AS ROOT."
 	[ -z $APACHE_RUN_USER ] && echo "APACHE_RUN_USER is not set! Exiting..." && exit 1
 	[ -z $APACHE_RUN_GROUP ] && echo "APACHE_RUN_GROUP is not set! Exiting..." && exit 2
 fi
 
-# Typically used in vhost definition files,
-# see conf/sites-available/ & conf/ports.conf
+## Typically used in vhost definition files, see conf/sites-available/ & conf/ports.conf
 #APACHE_Hostname=example.org
 #APACHE_ListenPort=80
 #APACHE_ListenPortSSL=443
 
-# For hand-compiled stuff, e.g. with ./configure --prefix=/opt/httpd-2.2.23/ ...
-# notably PATH would be prepended with /opt/httpd-2.2.23/bin.
+
+## Sample custom env. var. defined here :
+#My_Custom_Var="AValueThatShallNotContainSpaces"
+## That env. var. may eventually be passed to Apache by adding it to the Environment
+## bash array :
+#Environment=( "${Environment[@]}" My_Custom_Var )
+
+
+## The few path manipulation bash functions may come handy, ex. for handling
+## hand-compiled stuff in a "seamless / somewhat more conventionnal" manner.
+##
+## Ex. with Apache httpd having been installed under /opt/, here among others
+## $PATH would be prepended with /opt/httpd/bin.
+#prefixed_paths "/opt/httpd"
 #prefixed_paths "$StandingBear/local/apache"
 #prefixed_paths "$StandingBear/local/php"
+
 
 # Defaults to $SSH_CLIENT if defined! Else 127.0.0.1
 #
@@ -51,50 +97,48 @@ fi
 # Either define it explicitly, or unset SSH_CLIENT.
 #APACHE_AdminIp=127.0.0.1
 
-# Defaults to C if not defined.
-#LANG=C
-#LANG=en_US.UTF-8
 
-# A place with conf/, var/{lock,log,run,tmp,www}/.
-# Defaults to $StandingBear.
+## Would default to $LANG that is currently defined, else defaults to "C" ;
+## use `locale -a` for listing your available locales.
+#LANG=C
+#LANG=en
+#LANG=en_US.UTF-8
+#LANG=en_US.utf8
+#LANG=en_US.iso88591
+
+## A place with conf/, var/{lock,log,run,tmp,www}/.
+## Defaults to $StandingBear and shall remain to that value.
 #APACHE_ServerRoot="$StandingBear"
 
-# Defaults to /usr :
-#APACHE_Home=${APACHE_Home:=$APACHE_ServerRoot/local/apache}
 
-# E.g. :
-#ApacheHttpd=/usr/sbin/apache2
-#ApacheHttpd=/opt/apache2/bin/httpd
-#ApacheHttpd=`which apache2`
-#ApacheHttpd=`which httpd`
+#########
+## PHP ##
+#########
 
-#APACHE_Modules=/usr/lib/apache2/modules
-#APACHE_Manual=/usr/share/doc/apache-2.2.23/manual
-#APACHE_ErrorDocuments=/usr/share/apache2/error
-#APACHE_Icons=/usr/share/apache2/icons
-
-# Defaults to libphp5.so, may be an absolute path, else it ends up
-# prepended with $APACHE_Modules.
+## Defaults to libphp5.so, may be an absolute path, else it ends up
+## prepended with $APACHE_Modules.
 #APACHE_ModPhp5SO=libphp5.so.5.3
 #APACHE_ModPhp5SO=libphp5.so.5.4
 
-# E.g. on Gentoo :
+## E.g. on Gentoo :
 #APACHE_ModPhp5SO=/usr/lib/php5.3/apache2/libphp5.so
 #APACHE_ModPhp5SO=/usr/lib/php5.4/apache2/libphp5.so
 #APACHE_ModPhp5SO=/usr/lib/php5.5/apache2/libphp5.so
 
-#
-# E.g. hand-built PHP in /opt :
-#APACHE_ModPhp5SO=/opt/php-5.3.27/lib/libphp5.so
-#
+##
+## Or with a hand-built PHP in /opt :
+##
+
+# A custom env. var. SlashOptPhp that won't get passed to Apache may be used :
+#SlashOptPhp=/opt/php-5.3.23
 #SlashOptPhp=/opt/php-5.3.27
 
 #prefixed_paths $SlashOptPhp
 
+# See conf/mods-available/php5.conf
 #APACHE_ModPhp5SO=$SlashOptPhp/lib/libphp5.so
 
 # PHP binary path (fixme: get rid of this?):
-#PHPBIN=/opt/php-5.3.27/bin/php
 #PHPBIN=$SlashOptPhp/bin/php
 # Or, thanks to the prefixed_paths line above :
 PHPBIN=`which php`
@@ -193,13 +237,17 @@ ApacheDefines=( "${ApacheDefines[@]}" DAV SVN )
 #SYBASE_OCS=${SYBASE_OCS:-OCS-15_0}
 #DSQUERY=${DSQUERY:-}
 
-# From time to time I have to set it for dl to resolve Sybase libsyb*64.so, e.g. :
-#    « Cannot load /opt/php-5.3.23/lib/libphp5.so into server:
-#        libsybunic64.so: cannot open shared object file: No such file or directory »
-# Specifically this may be needed when Apache is invoked as root (an alternative
-# would be to add this to /etc/ld.so.conf ).
+## Or we may simply source the Sybase provided file:
+#source /opt/sybase/SYBASE.sh
+
+## From time to time I have to set it for dl to resolve Sybase libsyb*64.so, e.g. :
+##    « Cannot load /opt/php-5.3.23/lib/libphp5.so into server:
+##        libsybunic64.so: cannot open shared object file: No such file or directory »
+## Specifically this may be needed when Apache is invoked as root (an alternative
+## would be to add this to /etc/ld.so.conf ).
 #pathprepend "$SYBASE/$SYBASE_OCS/lib" LD_LIBRARY_PATH
 
 #Environment=( "${Environment[@]}" SYBASE SYBASE_OCS DSQUERY )
+
 
 # vim: filetype=sh
