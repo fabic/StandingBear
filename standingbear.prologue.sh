@@ -250,4 +250,7 @@ ApacheDefines=( "${ApacheDefines[@]}" DAV SVN )
 #Environment=( "${Environment[@]}" SYBASE SYBASE_OCS DSQUERY )
 
 
+VHOST_Dev_Root=/home/fabi/dev
+Environment=( "${Environment[@]}" VHOST_Dev_Root )
+
 # vim: filetype=sh

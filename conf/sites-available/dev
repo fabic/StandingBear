@@ -1,0 +1,93 @@
+# conf/sites-available/dev
+#
+# A sample virtual host, that would point at some all-purpose development
+# directory defined by ${VHOST_Dev_Root}
+#
+# NOTE: Gotta set ServerName! (for ex. define sthg in /etc/hosts).
+#
+<VirtualHost *:${APACHE_ListenPort}>
+	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
+
+	ServerName  dev.winterfell
+	ServerAlias dev
+
+	DocumentRoot "${VHOST_Dev_Root}/www"
+
+    #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+    #DirectoryIndex /_h5ai/server/php/index.php
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+	<Directory "${VHOST_Dev_Root}/www">
+		Options Indexes FollowSymLinks MultiViews
+		#AllowOverride None
+		AllowOverride All
+		#AllowOverride FileInfo
+		Order allow,deny
+		Allow from env=let_me_in
+        Include conf/vhost_authnz.include.conf
+	</Directory>
+
+	ScriptAlias /cgi-bin/ "${VHOST_Dev_Root}/www/cgi-bin/"
+
+	<Directory "${VHOST_Dev_Root}/www/cgi-bin/">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from env=let_me_in
+        Include conf/vhost_authnz.include.conf
+	</Directory>
+
+# WebDAV :
+<IfDefine DAV>
+	Alias /dav "${VHOST_Dev_Root}/www/dav/"
+	<Directory "${VHOST_Dev_Root}/www/dav/">
+		Options Indexes
+		Order allow,deny
+		Allow from env=let_me_in
+
+		Dav On
+
+        Include conf/vhost_authnz.include.conf
+
+		<LimitExcept GET OPTIONS>
+			Require user admin
+		</LimitExcept>
+	</Directory>
+</IfDefine>
+
+# Ruby's powered stuff :
+<IfDefine PASSENGER>
+	#RackBaseURI /app1
+	#RackBaseURI /app2
+	# Defaults to 'production' :
+	#RailsEnv development
+	RackBaseURI /rack
+	<Directory "${VHOST_Dev_Root}/www/rack">
+		Options -MultiViews
+        Include conf/vhost_authnz.include.conf
+	</Directory>
+</IfDefine>
+
+
+    ## MAINTENANCE MODE :
+    Include conf/vhost_maintenance_mode.include.conf
+
+    ## LOG FILES
+	##
+    ## Left c/o as we're using the server-wide configuration at :
+    ##    > conf/mods-enabled/log_config.conf (CustomLog ...)
+    ##    > conf/httpd.conf (ErrorLog ...)
+
+	#ErrorLog var/log/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	#LogLevel info
+
+	#CustomLog var/log/access.log combined
+</VirtualHost>
+# vim: ts=4:filetype=apache
