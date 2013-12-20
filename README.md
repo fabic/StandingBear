@@ -5,47 +5,96 @@ Essentially based on Debian 6.0.6 Apache2 configuration layout (from
 
 Apache is run in a wiped out environment.
 
-## ChangeLog
-
-* 2013-10-02 (Brussels) : Configuration review after a while...
 
 ## Installation
 
-    git clone git://github.com/Oeil-de-nuit/StandingBear.git
+    git clone https://github.com/fabic/StandingBear.git apachesb
 
 ## Configuration :
 
-Configuration consists in :
+### Configuration consists in :
 
-* Wiped out environment setup, see [standingbear.prologue.sh][1] & [standingbear.epilogue.sh][2] ;
-* Apache defines for enabling functionalities ;
-* Defining vhost(s), see e.g. [conf/sites-available/default][3] ;
-* [conf/httpd.conf][4] & [conf/httpd.local.conf][5] ;
+* Wiped out environment setup kit (`env -i ...`), a lot of stuff get achieved by just defining the correct environment variable instead of editing the actual configuration file; see [standingbear.prologue.sh][1] & [standingbear.epilogue.sh][2] ;
+* Apache defines for enabling functionalities (ex.: `-D REWRITE -D USERDIR -D DAV`) ;
+* Defining vhost(s) into `conf/sites-available/` see e.g. [conf/sites-available/default][3] and symlinking the ones to enabled from there into `conf/sites-enabled/` ;
+* Editing [conf/httpd.conf][4] and/or [conf/httpd.local.conf][5] ;
 
-Default environment without configuration would usually end up like :
+### Default environment without configuration would usually end up like :
 
-	StandingBear           /home/fabi/dev/standingbear
-	_SB                    /_sb
-	APACHE_AdminIp         127.0.0.1
-	APACHE_ConfigFile      conf/httpd.conf
-	APACHE_ErrorDocuments  /usr/share/apache2/error
-	APACHE_Home            /usr
-	APACHE_HostDomain      me
-	APACHE_Hostname        randombinarythoughts.com
-	APACHE_Httpd           /usr/sbin/apache2
-	APACHE_Icons           /usr/share/apache2/icons
-	APACHE_LdapAuthURL     ldap://127.0.0.1:389/dc=randombinarythoughts,dc=com?uid?sub?(objectClass=*)
-	APACHE_ListenPort      8000
-	APACHE_ListenPortSSL   8001
-	APACHE_Manual          /usr/share/doc/apache-2.2.24/manual
-	APACHE_ModPhp5SO       /usr/lib/apache2/modules/libphp5.so
-	APACHE_Modules         /usr/lib/apache2/modules
-	APACHE_RUN_GROUP       fabi
-	APACHE_RUN_USER        fabi
-	APACHE_ServerRoot      /home/fabi/dev/standingbear
-	LANG                   en_US.UTF-8
-	PATH                   /home/fabi/dev/standingbear/bin:/home/fabi/bin:/opt/bin:/usr/local/bin:/usr/bin:/bin
-	LD_LIBRARY_PATH        nil
+With Apache httpd 2.2.x installed in `/opt/httpd-2.2.x/`.
+
+   StandingBear=/home/fabi/dev/sb
+   _SB=/_sb
+   APACHE_AdminIp=127.0.0.1
+
+   APACHE_ServerRoot=/home/fabi/dev/sb
+   APACHE_ConfigFile=conf/httpd.conf
+
+   APACHE_Home=/opt/httpd-2.2.26
+   APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd
+   APACHE_Modules=/opt/httpd-2.2.26/modules
+
+   APACHE_Hostname=localhost
+   APACHE_ListenPort=8000
+   APACHE_ListenPortSSL=8443
+
+   APACHE_RUN_GROUP=fabi
+   APACHE_RUN_USER=fabi
+   APACHE_WwwRoot=/home/fabi/dev/sb/www
+
+   APACHE_ErrorDocuments=/opt/httpd-2.2.26/error
+   APACHE_Icons=/opt/httpd-2.2.26/icons
+   APACHE_Manual=/opt/httpd-2.2.26/manual
+   
+   APACHE_HostDomain=nil
+
+   APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*)
+
+   APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so
+
+   LANG=en_US.UTF-8
+   PATH=/home/fabi/dev/sb/bin:/opt/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3:/usr/games/bin:/home/fabi/.bash_it/plugins/available/todo
+   LD_LIBRARY_PATH=nil
+
+   APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend
+   APACHE_Gitweb=nil
+   GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories
+   GIT_HTTP_EXPORT_ALL=nil
+   GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf
+
+   SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories
+
+   APACHE_ModPassengerSo=nil
+   APACHE_ModPassenger_Root=nil
+   APACHE_ModPassenger_Ruby=/usr/bin/ruby
+
+And this ends up as a `$Env` variable :
+
+    env -i  StandingBear=/home/fabi/dev/sb _SB=/_sb APACHE_AdminIp=127.0.0.1 APACHE_ConfigFile=conf/httpd.conf APACHE_ErrorDocuments=/opt/httpd-2.2.26/error APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend APACHE_Gitweb=nil APACHE_Home=/opt/httpd-2.2.26 APACHE_HostDomain=nil APACHE_Hostname=localhost APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd APACHE_Icons=/opt/httpd-2.2.26/icons APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*) APACHE_ListenPort=8000 APACHE_ListenPortSSL=8443 APACHE_Manual=/opt/httpd-2.2.26/manual APACHE_ModPassengerSo=nil APACHE_ModPassenger_Root=nil APACHE_ModPassenger_Ruby=/usr/bin/ruby APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so APACHE_Modules=/opt/httpd-2.2.26/modules APACHE_RUN_GROUP=fabi APACHE_RUN_USER=fabi APACHE_ServerRoot=/home/fabi/dev/sb APACHE_WwwRoot=/home/fabi/dev/sb/www LANG=en_US.UTF-8 PATH=/home/fabi/dev/sb/bin:/opt/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3:/usr/games/bin:/home/fabi/.bash_it/plugins/available/todo LD_LIBRARY_PATH=nil GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories GIT_HTTP_EXPORT_ALL=nil GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories
+
+Which is used for invoking `httpd` in `apachectl`:
+
+    $Env \
+        $APACHE_Httpd \
+        -d "$APACHE_ServerRoot" \
+        -f "$APACHE_ConfigFile" \
+        ${ApacheDefines[@]/#/-D } \
+        "$@"
+
+Here's a sample final command that get used to start `httpd` :
+
+    env -i StandingBear=/home/fabi/dev/sb _SB=/_sb APACHE_AdminIp=127.0.0.1 APACHE_ConfigFile=conf/httpd.conf APACHE_ErrorDocuments=/opt/httpd-2.2.26/error APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend APACHE_Gitweb=nil APACHE_Home=/opt/httpd-2.2.26 APACHE_HostDomain=nil APACHE_Hostname=localhost APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd APACHE_Icons=/opt/httpd-2.2.26/icons APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*) APACHE_ListenPort=8000 APACHE_ListenPortSSL=8443 APACHE_Manual=/opt/httpd-2.2.26/manual APACHE_ModPassengerSo=nil APACHE_ModPassenger_Root=nil APACHE_ModPassenger_Ruby=/usr/bin/ruby APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so APACHE_Modules=/opt/httpd-2.2.26/modules APACHE_RUN_GROUP=fabi APACHE_RUN_USER=fabi APACHE_ServerRoot=/home/fabi/dev/sb APACHE_WwwRoot=/home/fabi/dev/sb/www LANG=en_US.UTF-8 PATH=/home/fabi/dev/sb/bin:/opt/bin:/usr/local/bin:/usr/bin:/bin GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories \
+
+    /opt/httpd-2.2.26/bin/httpd \
+
+        -d /home/fabi/dev/sb \
+
+        -f conf/httpd.conf \
+
+        -D LANGUAGE -D REWRITE -D AUTOINDEX -D AUTH_BASIC -D DEFAULT_VHOST -D STANDINGBEAR -D INFO -D STATUS -D MANUAL -D ERRORDOCS -D DAV \
+        
+        -k start
+
 
 
 ## Usage
@@ -78,14 +127,20 @@ Default environment without configuration would usually end up like :
 
     # Note that restart sometimes seems not enough for Apache to properly
     # catch configuration changes; It happens that a real stop-start is required.
-    ./apachectl -k restart  (or ./restart_www)
+    ./apachectl -k restart
+
+    # Stop, sleep 1 sec., Start :
+    ./restart_www
+
 
 ## Directory layout
 
     bin/
+        php               : A wrapper around the PHP CLI binary.
 
     conf/
          conf.d/
+            standingbear  : /_sb/ "admin. area" is defined from herein.
          mods-available/  : Actual Apache module load & conf. statements.
          mods-enabled/    : Symlinks from ../mods-available/
          sites-available/ : default, default-ssl, www.example.org
@@ -94,15 +149,29 @@ Default environment without configuration would usually end up like :
          httpd.conf
          httpd.local.conf
 
+    conf22/    : The Apache httpd-2.2.x conf/ dir.
+    conf24/    : The Apache httpd-2.4.x conf/ dir.
+
     php/
-        php.ini
+        php-chunked-xhtml/  : 
+        session_files/      : PHP INI session.save_path
+        upload_tmp_dir/     : PHP INI upload_tmp_dir
+
+    logs -> var/log/ symlink.
 
     var/
         lock/
             DAVLock/
         log/
+            access_log
+            error_log
+            rewrite.log
+            php.log         : PHP INI error_log
         run/
-        tmp/ (unused)
+            httpd.pid
+            httpd22.pid
+            httpd24.pid
+        tmp/                : (unused)
 
     # Where vhost's document root points at :
     www/
@@ -120,12 +189,20 @@ Default environment without configuration would usually end up like :
                 cgi-bin/
                 htdocs/
 
+
 ## Included stuff as Git submodules :
 
 Apigen.php, Apaxy, h5ai
 
     git submodule status
     git submodule update --init --recursive ...
+
+
+
+## ChangeLog
+
+* 2013-12-20 (St-Denis) : Some review; imported as-is (mostly) the httpd-2.2 & httpd-2.4 sample configuration layouts.
+* 2013-10-02 (Brussels) : Configuration review after a while...
 
 
 
