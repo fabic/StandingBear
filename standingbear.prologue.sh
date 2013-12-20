@@ -70,6 +70,8 @@ fi
 #APACHE_Hostname=example.org
 #APACHE_ListenPort=80
 #APACHE_ListenPortSSL=443
+APACHE_ListenPort=8000
+APACHE_ListenPortSSL=8443
 
 
 ## Sample custom env. var. defined here :
