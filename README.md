@@ -23,50 +23,50 @@ Apache is run in a wiped out environment.
 
 With Apache httpd 2.2.x installed in `/opt/httpd-2.2.x/`.
 
-   StandingBear=/home/fabi/dev/sb
-   _SB=/_sb
-   APACHE_AdminIp=127.0.0.1
+    StandingBear=/home/fabi/dev/sb
+    _SB=/_sb
+    APACHE_AdminIp=127.0.0.1
 
-   APACHE_ServerRoot=/home/fabi/dev/sb
-   APACHE_ConfigFile=conf/httpd.conf
+    APACHE_ServerRoot=/home/fabi/dev/sb
+    APACHE_ConfigFile=conf/httpd.conf
 
-   APACHE_Home=/opt/httpd-2.2.26
-   APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd
-   APACHE_Modules=/opt/httpd-2.2.26/modules
+    APACHE_Home=/opt/httpd-2.2.26
+    APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd
+    APACHE_Modules=/opt/httpd-2.2.26/modules
 
-   APACHE_Hostname=localhost
-   APACHE_ListenPort=8000
-   APACHE_ListenPortSSL=8443
+    APACHE_Hostname=localhost
+    APACHE_ListenPort=8000
+    APACHE_ListenPortSSL=8443
 
-   APACHE_RUN_GROUP=fabi
-   APACHE_RUN_USER=fabi
-   APACHE_WwwRoot=/home/fabi/dev/sb/www
+    APACHE_RUN_GROUP=fabi
+    APACHE_RUN_USER=fabi
+    APACHE_WwwRoot=/home/fabi/dev/sb/www
 
-   APACHE_ErrorDocuments=/opt/httpd-2.2.26/error
-   APACHE_Icons=/opt/httpd-2.2.26/icons
-   APACHE_Manual=/opt/httpd-2.2.26/manual
-   
-   APACHE_HostDomain=nil
+    APACHE_ErrorDocuments=/opt/httpd-2.2.26/error
+    APACHE_Icons=/opt/httpd-2.2.26/icons
+    APACHE_Manual=/opt/httpd-2.2.26/manual
 
-   APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*)
+    APACHE_HostDomain=nil
 
-   APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so
+    APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*)
 
-   LANG=en_US.UTF-8
-   PATH=/home/fabi/dev/sb/bin:/opt/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3:/usr/games/bin:/home/fabi/.bash_it/plugins/available/todo
-   LD_LIBRARY_PATH=nil
+    APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so
 
-   APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend
-   APACHE_Gitweb=nil
-   GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories
-   GIT_HTTP_EXPORT_ALL=nil
-   GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf
+    LANG=en_US.UTF-8
+    PATH=/home/fabi/dev/sb/bin:/opt/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3:/usr/games/bin:/home/fabi/.bash_it/plugins/available/todo
+    LD_LIBRARY_PATH=nil
 
-   SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories
+    APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend
+    APACHE_Gitweb=nil
+    GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories
+    GIT_HTTP_EXPORT_ALL=nil
+    GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf
 
-   APACHE_ModPassengerSo=nil
-   APACHE_ModPassenger_Root=nil
-   APACHE_ModPassenger_Ruby=/usr/bin/ruby
+    SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories
+
+    APACHE_ModPassengerSo=nil
+    APACHE_ModPassenger_Root=nil
+    APACHE_ModPassenger_Ruby=/usr/bin/ruby
 
 And this ends up as a `$Env` variable :
 
@@ -84,16 +84,11 @@ Which is used for invoking `httpd` in `apachectl`:
 Here's a sample final command that get used to start `httpd` :
 
     env -i StandingBear=/home/fabi/dev/sb _SB=/_sb APACHE_AdminIp=127.0.0.1 APACHE_ConfigFile=conf/httpd.conf APACHE_ErrorDocuments=/opt/httpd-2.2.26/error APACHE_Git_HttpBackend=/usr/libexec/git-core/git-http-backend APACHE_Gitweb=nil APACHE_Home=/opt/httpd-2.2.26 APACHE_HostDomain=nil APACHE_Hostname=localhost APACHE_Httpd=/opt/httpd-2.2.26/bin/httpd APACHE_Icons=/opt/httpd-2.2.26/icons APACHE_LdapAuthURL=ldap://127.0.0.1:389/?uid?sub?(objectClass=*) APACHE_ListenPort=8000 APACHE_ListenPortSSL=8443 APACHE_Manual=/opt/httpd-2.2.26/manual APACHE_ModPassengerSo=nil APACHE_ModPassenger_Root=nil APACHE_ModPassenger_Ruby=/usr/bin/ruby APACHE_ModPhp5SO=/opt/httpd-2.2.26/modules/libphp5.so APACHE_Modules=/opt/httpd-2.2.26/modules APACHE_RUN_GROUP=fabi APACHE_RUN_USER=fabi APACHE_ServerRoot=/home/fabi/dev/sb APACHE_WwwRoot=/home/fabi/dev/sb/www LANG=en_US.UTF-8 PATH=/home/fabi/dev/sb/bin:/opt/bin:/usr/local/bin:/usr/bin:/bin GIT_PROJECT_ROOT=/home/fabi/dev/sb/git_repositories GITWEB_CONFIG=/home/fabi/dev/sb/gitweb.conf SVN_PROJECTS_ROOT=/home/fabi/dev/sb/svn_repositories \
-
-    /opt/httpd-2.2.26/bin/httpd \
-
-        -d /home/fabi/dev/sb \
-
-        -f conf/httpd.conf \
-
-        -D LANGUAGE -D REWRITE -D AUTOINDEX -D AUTH_BASIC -D DEFAULT_VHOST -D STANDINGBEAR -D INFO -D STATUS -D MANUAL -D ERRORDOCS -D DAV \
-        
-        -k start
+        /opt/httpd-2.2.26/bin/httpd \
+            -d /home/fabi/dev/sb \
+            -f conf/httpd.conf \
+            -D LANGUAGE -D REWRITE -D AUTOINDEX -D AUTH_BASIC -D DEFAULT_VHOST -D STANDINGBEAR -D INFO -D STATUS -D MANUAL -D ERRORDOCS -D DAV \
+            -k start
 
 
 
@@ -169,8 +164,8 @@ Here's a sample final command that get used to start `httpd` :
             php.log         : PHP INI error_log
         run/
             httpd.pid
-            httpd22.pid
-            httpd24.pid
+            httpd22.pid     : See conf22/httpd.conf
+            httpd24.pid     : See conf24/httpd.conf
         tmp/                : (unused)
 
     # Where vhost's document root points at :
@@ -192,6 +187,8 @@ Here's a sample final command that get used to start `httpd` :
 
 ## Included stuff as Git submodules :
 
+_deprecated_ **todo: remove these stuff.**
+
 Apigen.php, Apaxy, h5ai
 
     git submodule status
@@ -206,23 +203,24 @@ Apigen.php, Apaxy, h5ai
 
 
 
-## TODO:
+## TODO :
 
 * [w] README.md : Config. layout, runtime dirs, documentation.
 * [ ] Move all scripts under bin/ ??
 * [x] Fix Allow from env=let_me_in
 * [x] Maintenance mode thing ?
 * [ ] logrotate
-* [ ] SSL conf. ?
+* [~] SSL conf. ? -> needs review and testing.
 * [ ] /robots.txt? (incl. search engine stuff..)
 * [ ] The missing favicon.ico
 * [ ] Remove symlinks from Git scm.
 * [ ] local/ : Is it a good idea ? --> rename to vendor/ ?
 * [ ]   » Sh script for symlinking stuff in local/apache_symlinks/ & local/php_symlinks/ ?
 * [ ] ccze, AwStats...
-* [ ] Gitweb ?
+* [x] Gitweb
 * [ ] "online source browser" : find an "on-the-fly" syntax highlighter for prog./markup languages.
 * [x] Have a /_sb/ for anything StandingBear specifics, basically the whole default site thing maybe.. 
+
 
 ### PHP
 
@@ -245,7 +243,9 @@ Apigen.php, Apaxy, h5ai
 * [ ] xdebug conf., e.g. xdebug.manual_url
 * [ ] Find something for generating/displaying a nice searchable output of PHP's manual.
 
+
 ### Misc.
+
 * [x] Tomcat AJP
 * [ ] Ruby 1.8 / 1.9, mod_ruby, fastcgi-ed
 * [ ] Python, incl. fastcgi, wsgi? ...
@@ -259,6 +259,7 @@ Apigen.php, Apaxy, h5ai
 * [ ] WebDAV enabled app (php?) for simple drag'n'drop.
 * [ ] proxy.pac file ?
 
+
 ### Apache modules
 
 * [x] mod_DAV ?
@@ -271,7 +272,7 @@ Apigen.php, Apaxy, h5ai
 * [ ] mod evasive ?
 * [ ] www-apache/mod_musicindex <http://hacks.slashdirt.org/musicindex/>
 * [ ] mod_fcgid vs mod_fastcgi
-* [ ] mod_dav_svn
+* [x] mod_dav_svn
 * [ ] www-apache/mod_bw (http://www.ivn.cl/apache/)
 * [ ] www-apache/mod_loadavg 
 * [ ] www-apache/mod_proxy_html <http://apache.webthing.com/mod_proxy_html/>
