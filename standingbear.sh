@@ -50,6 +50,9 @@ APACHE_AdminIp=${APACHE_AdminIp:-127.0.0.1}
 APACHE_ServerRoot=${APACHE_ServerRoot:-$StandingBear}
 APACHE_ConfigFile=${APACHE_ConfigFile:-conf/httpd.conf}
 
+# www/ : The place where the misc. virtual host web stuff reside.
+APACHE_WwwRoot=${APACHE_WwwRoot:-"$APACHE_ServerRoot/www"}
+
 # fixme/todo: auto setup if /usr or /usr/local & if not usr, such as /opt ?
 # Ex. write a guess_apache_thing() function ?
 #APACHE_Home=${APACHE_Home:-$APACHE_ServerRoot/local/apache}
