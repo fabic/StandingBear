@@ -1,17 +1,31 @@
-# conf/sites-available/dev
+# File: conf/sites-available/dev
 #
 # A sample virtual host, that would point at some all-purpose development
 # directory defined by ${VHOST_Dev_Root}
 #
 # NOTE: Gotta set ServerName! (for ex. define sthg in /etc/hosts).
 #
-<VirtualHost *:${APACHE_ListenPort}>
+# Expected directory layout at $VHOST_Dev_Root :
+#    - cgi-bin/
+#    - dav/
+#    - rack/
+#    - logs/
+#
+# Ex.:
+#    ~ $ mkdir -pv $HOME/dev/www/{cgi-bin,dav,rack,logs}
+#
+<IfDefine VHOST_DEV>
+
+Listen ${VHOST_Dev_ListenPort}
+
+<VirtualHost *:${VHOST_Dev_ListenPort}>
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	ServerName  dev.winterfell
+	#ServerName  dev.winterfell
+	ServerName  ${VHOST_Dev_ServerName}
 	ServerAlias dev
 
-	DocumentRoot "${VHOST_Dev_Root}/www"
+	DocumentRoot "${VHOST_Dev_Root}"
 
     #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
     #DirectoryIndex /_h5ai/server/php/index.php
@@ -21,7 +35,7 @@
 		AllowOverride None
 	</Directory>
 
-	<Directory "${VHOST_Dev_Root}/www">
+	<Directory "${VHOST_Dev_Root}">
 		Options Indexes FollowSymLinks MultiViews
 		#AllowOverride None
 		AllowOverride All
@@ -33,7 +47,7 @@
 
 	ScriptAlias /cgi-bin/ "${VHOST_Dev_Root}/www/cgi-bin/"
 
-	<Directory "${VHOST_Dev_Root}/www/cgi-bin/">
+	<Directory "${VHOST_Dev_Root}/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny
@@ -43,8 +57,8 @@
 
 # WebDAV :
 <IfDefine DAV>
-	Alias /dav "${VHOST_Dev_Root}/www/dav/"
-	<Directory "${VHOST_Dev_Root}/www/dav/">
+	Alias /dav "${VHOST_Dev_Root}/dav/"
+	<Directory "${VHOST_Dev_Root}/dav/">
 		Options Indexes
 		Order allow,deny
 		Allow from env=let_me_in
@@ -66,7 +80,7 @@
 	# Defaults to 'production' :
 	#RailsEnv development
 	RackBaseURI /rack
-	<Directory "${VHOST_Dev_Root}/www/rack">
+	<Directory "${VHOST_Dev_Root}/rack">
 		Options -MultiViews
         Include conf/vhost_authnz.include.conf
 	</Directory>
@@ -83,11 +97,14 @@
     ##    > conf/httpd.conf (ErrorLog ...)
 
 	#ErrorLog var/log/error.log
+	ErrorLog ${VHOST_Dev_Root}/logs/error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
-	#LogLevel info
+	LogLevel info
 
 	#CustomLog var/log/access.log combined
+	CustomLog ${VHOST_Dev_Root}/logs/access.log combined
 </VirtualHost>
+</IfDefine>
 # vim: ts=4:filetype=apache

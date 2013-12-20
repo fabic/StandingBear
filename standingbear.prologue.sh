@@ -252,7 +252,19 @@ ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 #Environment=( "${Environment[@]}" SYBASE SYBASE_OCS DSQUERY )
 
 
-VHOST_Dev_Root=/home/fabi/dev
-Environment=( "${Environment[@]}" VHOST_Dev_Root )
+##
+## For the sample virtual host (conf/sites-available/dev) :
+##     * Enabled by an Apache define: VHOST_DEV
+##     * ...
+##
+#VHOST_Dev_Root=/home/fabi/dev/www
+# Take care with $HOME if you intend to invoke httpd as root!
+VHOST_Dev_Root="$HOME/dev/www"
+if [ -d "$VHOST_Dev_Root" ]; then
+	ApacheDefines=( "${ApacheDefines[@]}" VHOST_DEV )
+	VHOST_Dev_ServerName=${APACHE_Hostname}
+	let VHOST_Dev_ListenPort=$APACHE_ListenPort+1
+	Environment=( "${Environment[@]}" VHOST_Dev_Root VHOST_Dev_ListenPort VHOST_Dev_ServerName )
+fi
 
 # vim: filetype=sh
