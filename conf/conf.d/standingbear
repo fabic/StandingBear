@@ -24,8 +24,8 @@
     #
     # CGI-BINs
     #
-    ScriptAlias ${_SB}/cgi-bin/ "${APACHE_ServerRoot}/www/_sb/cgi-bin/"
-    <Directory "${APACHE_ServerRoot}/www/_sb/cgi-bin/">
+    ScriptAlias ${_SB}/cgi-bin/ "${APACHE_WwwRoot}/_sb/cgi-bin/"
+    <Directory "${APACHE_WwwRoot}/_sb/cgi-bin/">
         AllowOverride None
         Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
         Order deny,allow
@@ -36,8 +36,8 @@
     #
     # /_sb/
     #
-    Alias ${_SB} "${APACHE_ServerRoot}/www/_sb/htdocs/"
-    <Directory "${APACHE_ServerRoot}/www/_sb/htdocs/">
+    Alias ${_SB} "${APACHE_WwwRoot}/_sb/htdocs/"
+    <Directory "${APACHE_WwwRoot}/_sb/htdocs/">
         Options Indexes SymLinksIfOwnerMatch
         AllowOverride All
         Order deny,allow
@@ -48,8 +48,8 @@
     #
     # MAINTENANCE MODE ALIAS
     #
-    Alias /maintenance-in-progress "${APACHE_ServerRoot}/www/_sb/htdocs/maintenance-in-progress/"
-    <Directory "${APACHE_ServerRoot}/www/_sb/htdocs/maintenance-in-progress/">
+    Alias /maintenance-in-progress "${APACHE_WwwRoot}/_sb/htdocs/maintenance-in-progress/"
+    <Directory "${APACHE_WwwRoot}/_sb/htdocs/maintenance-in-progress/">
         Options Indexes SymLinksIfOwnerMatch
         AllowOverride None
         Order allow,deny

@@ -5,22 +5,22 @@
 
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	DocumentRoot "${APACHE_ServerRoot}/www/www.example.org/htdocs"
+	DocumentRoot "${APACHE_WwwRoot}/www.example.org/htdocs"
 
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
 
-	<Directory "${APACHE_ServerRoot}/www/www.example.org/htdocs">
+	<Directory "${APACHE_WwwRoot}/www.example.org/htdocs">
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride None
 		Order allow,deny
 		allow from all
 	</Directory>
 
-	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/www.example.org/cgi-bin/"
-	<Directory "${APACHE_ServerRoot}/www/www.example.org/cgi-bin/">
+	ScriptAlias /cgi-bin/ "${APACHE_WwwRoot}/www.example.org/cgi-bin/"
+	<Directory "${APACHE_WwwRoot}/www.example.org/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny

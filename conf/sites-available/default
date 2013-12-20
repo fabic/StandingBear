@@ -4,8 +4,10 @@
 <VirtualHost *:${APACHE_ListenPort}>
 	ServerAdmin ${APACHE_RUN_USER}@${APACHE_Hostname}
 
-	DocumentRoot "${APACHE_ServerRoot}/www/default/htdocs"
-	#DocumentRoot "${APACHE_ServerRoot}/www"
+	DocumentRoot "${APACHE_WwwRoot}/default/htdocs"
+
+	#DocumentRoot "/var/www/htdocs"
+	#DocumentRoot "/opt/httpd-2.2.26/htdocs"
 
     DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
     #DirectoryIndex /_h5ai/server/php/index.php
@@ -15,7 +17,7 @@
 		AllowOverride None
 	</Directory>
 
-	<Directory "${APACHE_ServerRoot}/www/default/htdocs">
+	<Directory "${APACHE_WwwRoot}/default/htdocs">
 		Options Indexes FollowSymLinks MultiViews
 		#AllowOverride None
 		AllowOverride All
@@ -26,8 +28,8 @@
         Include conf/vhost_authnz.include.conf
 	</Directory>
 
-	ScriptAlias /cgi-bin/ "${APACHE_ServerRoot}/www/default/cgi-bin/"
-	<Directory "${APACHE_ServerRoot}/www/default/cgi-bin/">
+	ScriptAlias /cgi-bin/ "${APACHE_WwwRoot}/default/cgi-bin/"
+	<Directory "${APACHE_WwwRoot}/default/cgi-bin/">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny
@@ -41,14 +43,14 @@
         # Defaults to 'production' :
         #RailsEnv development
         RackBaseURI /rack
-        <Directory "${APACHE_ServerRoot}/www/default/htdocs/rack">
+        <Directory "${APACHE_WwwRoot}/default/htdocs/rack">
             Options -MultiViews
         </Directory>
     </IfDefine>
 
 <IfDefine DAV>
-	Alias /dav "${APACHE_ServerRoot}/www/default/dav/"
-	<Directory "${APACHE_ServerRoot}/www/default/dav/">
+	Alias /dav "${APACHE_WwwRoot}/default/dav/"
+	<Directory "${APACHE_WwwRoot}/default/dav/">
 		Options Indexes
 		Order allow,deny
 		Allow from all
