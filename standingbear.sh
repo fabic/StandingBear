@@ -17,7 +17,7 @@
 # todo: have a check_path_correct() func. ?
 # todo: test/debug if spaces in paths.
 # todo: chdir bef exec ?
-#
+# todo/fixme: don't use locate.
 
 # For scripts to have their location at hands-reach, realpath
 # so that scripts can be symlinked :
@@ -163,11 +163,17 @@ export ${Environment[@]}
 # todo: have it be a sb_display_env()?
 #
 if [ `basename "$0"` == "${BASH_SOURCE[0]}" ]; then
+    echo "--- \$HERE=$HERE"
+    echo "--- Environment: ---"
     for e in "${Environment[@]}"; do
         echo -n '   '
         # Using # instead of = because of the basedn of APACHE_LdapAuthURL
         # (and the piped through column thing below) :
         echo "$e#${!e}"
     done | column -t -s '#'
+    echo "--- \$Env: ---"
+    echo "$Env"
+    echo "--- Apache Defines: ---"
+    echo ${ApacheDefines[@]}
 fi
 # vim: ts=4 filetype=sh
