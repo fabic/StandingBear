@@ -151,7 +151,7 @@ Environment=( StandingBear _SB "${!APACHE@}" LANG PATH LD_LIBRARY_PATH GIT_PROJE
 #
 Env="env -i "
 for e in "${Environment[@]}"; do
-    declare $e=${!e:=nil}
+    declare $e="${!e:=nil}"
     Env="$Env $e=${!e}"
 done
 
