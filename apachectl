@@ -9,25 +9,33 @@
 source `dirname "$0"`/standingbear.sh
 
 # TEMP... 
+echo "---"
 echo Environment :
 for e in ${Environment[@]}; do
     echo -n '   '
     echo $e=${!e}
 done
 
+echo "---"
 echo "Apache home: $APACHE_Home"
 echo "httpd is: $APACHE_Httpd"
 echo "Apache defines (-D ...) : ${ApacheDefines[@]}"
 
 # fixme: Temp.
 touch "$StandingBear/var/log/php.log"
+
+echo "---"
+
 #exec \
 #echo \
 $Env \
     $APACHE_Httpd \
-    ${ApacheDefines[@]/#/-D } \
     -d "$APACHE_ServerRoot" \
     -f "$APACHE_ConfigFile" \
+    ${ApacheDefines[@]/#/-D } \
     "$@"
+
 retv=$?
+
+echo "---"
 echo "Exit status: $retv"
