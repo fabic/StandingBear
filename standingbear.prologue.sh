@@ -193,8 +193,8 @@ PHPBIN=`which php`
 #  * FASTCGI       : conf/mods-available/fastcgi.conf
 #  * FCGID         : conf/mods-available/fcgid.conf
 #  * SCGID         : conf/mods-available/scgid.conf
-#  * AUTH_BASIC    : conf//mods-available/auth_basic.conf
-#  * AUTH_DIGEST   : conf//mods-available/auth_digest.conf
+#  * AUTH_BASIC    : conf/mods-available/auth_basic.conf
+#  * AUTH_DIGEST   : conf/mods-available/auth_digest.conf
 #  * PROXY : conf/mods-available/proxy.conf
 #  *    PROXY_FTP, PROXY_HTTP, PROXY_CONNECT,
 #  *    PROXY_AJP, PROXY_SCGI,
@@ -212,6 +212,7 @@ PHPBIN=`which php`
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
 #  * MARKDOWN
 #
+declare -a ApacheDefines
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
 #ApacheDefines=( "${ApacheDefines[@]}" SSL SSL_DEFAULT_VHOST )
 ApacheDefines=( "${ApacheDefines[@]}" STANDINGBEAR )
@@ -266,5 +267,8 @@ if [ -d "$VHOST_Dev_Root" ]; then
 	let VHOST_Dev_ListenPort=$APACHE_ListenPort+1
 	Environment=( "${Environment[@]}" VHOST_Dev_Root VHOST_Dev_ListenPort VHOST_Dev_ServerName )
 fi
+
+# Ok, that's questionable to say the least.
+#Environment=( "${Environment[@]}" DISPLAY XAUTHORITY )
 
 # vim: filetype=sh
