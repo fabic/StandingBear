@@ -219,6 +219,7 @@ PHPBIN=`which php`
 #  * STANDINGBEAR : Enable StandingBear stuff under $_SB (e.g. /_sb/)
 #  * AI_APAXY : mod_autoindex AdamWhitcroft's Apaxy theming (Git submodule)
 #  * MARKDOWN
+#  * AWSTATS : conf/conf.d/awstats ( http://www.awstats.org/ )
 #
 declare -a ApacheDefines
 ApacheDefines=( LANGUAGE REWRITE AUTOINDEX AUTH_BASIC DEFAULT_VHOST )
@@ -237,6 +238,12 @@ ApacheDefines=( "${ApacheDefines[@]}" MANUAL ERRORDOCS )
 #ApacheDefines=( "${ApacheDefines[@]}" GIT_HTTP_BACKEND )
 #ApacheDefines=( "${ApacheDefines[@]}" GITWEB )
 #ApacheDefines=( "${ApacheDefines[@]}" DAV SVN )
+#ApacheDefines=( "${ApacheDefines[@]}" AWSTATS )
+
+# Awstats' define.. is enabled automatically if found "here".
+if [ -x "$StandingBear/awstats" ]; then
+	ApacheDefines=( "${ApacheDefines[@]}" AWSTATS )
+fi
 
 #######################################################################
 ### Custom "to-be-passed" environment may be done from within here, ###
