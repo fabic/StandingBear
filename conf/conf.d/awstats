@@ -1,0 +1,32 @@
+# File: conf/conf.d/awstats
+#
+# Fcj.2014-04-09
+#
+# @link http://awstats.sourceforge.net/docs/awstats_setup.html
+#
+<IfDefine AWSTATS>
+
+#
+# Directives to allow use of AWStats as a CGI
+#
+Alias /awstats/classes "${APACHE_ServerRoot}/awstats/wwwroot/classes/"
+Alias /awstats/css     "${APACHE_ServerRoot}/awstats/wwwroot/css/"
+Alias /awstats/icons   "${APACHE_ServerRoot}/awstats/wwwroot/icon/"
+ScriptAlias /awstats/  "${APACHE_ServerRoot}/awstats/wwwroot/cgi-bin/"
+
+#
+# This is to permit URL access to scripts/files in AWStats directory.
+#
+<Directory "${APACHE_ServerRoot}/awstats/wwwroot">
+    Options None
+    AllowOverride None
+
+    Order deny,allow
+    Deny from all
+    Allow from env=let_me_in
+
+    Include conf/vhost_authnz.include.conf
+</Directory>
+
+</IfDefine>
+# vim: ts=4 filetype=apache
